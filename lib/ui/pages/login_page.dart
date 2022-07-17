@@ -96,8 +96,25 @@ class _LoginPageState extends State<LoginPage> {
                   margin: EdgeInsets.only(bottom: 32),
                   alignment: Alignment.center,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Get.to(() => HomePage());
+                    onPressed: () async {
+                      setState(() {
+                        LoadingIndicator.of(context).show();
+                      });
+
+                      await context
+                          .bloc<UserCubit>()
+                          .login(emailController.text, passwordController.text);
+                      UserState state = context.bloc<UserCubit>().state;
+
+                      if (state is UserLoaded) {
+                        snackbarSuccess(title: 'Login Sukses');
+                        Get.to(() => HomePage());
+                      } else {
+                        LoadingIndicator.of(context).hide();
+                        snackbarError(
+                            title: 'Login Gagal',
+                            message: (state as UserLoadedFailed).message!);
+                      }
                     },
                     child: Text(
                       'Sign In',

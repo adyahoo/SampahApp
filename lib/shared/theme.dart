@@ -23,3 +23,25 @@ ButtonStyle primaryBtnStyle = ButtonStyle(
     fixedSize: MaterialStateProperty.all(Size.fromWidth(237)),
     shape: MaterialStateProperty.all(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))));
+
+SnackbarController snackbarSuccess({String? title}) {
+  return Get.snackbar("", "",
+      backgroundColor: Colors.green,
+      titleText: Text(
+        title!,
+        style: textBoldStyle.copyWith(color: Colors.white),
+      ));
+}
+
+SnackbarController snackbarError({String? title, String? message}) {
+  return Get.snackbar("", "",
+      backgroundColor: Colors.red,
+      titleText: Text(
+        title!,
+        style: textBoldStyle.copyWith(color: Colors.white),
+      ),
+      messageText: Text(
+        message!,
+        style: GoogleFonts.poppins().copyWith(color: Colors.white),
+      ));
+}
