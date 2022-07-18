@@ -2,16 +2,21 @@ part of 'shared.dart';
 
 Color primaryColor = "7C9473".toColor();
 Color secondaryColor = "CDD0CB".toColor();
+Color tertiaryColor = "E8EAE6".toColor();
 Color textColor = "2B2B2B".toColor();
 Color inputBgColor = "F9F9F9".toColor();
 
 TextStyle titleStyle = GoogleFonts.poppins()
     .copyWith(fontWeight: FontWeight.w600, fontSize: 22, color: textColor);
-TextStyle textBoldStyle =
+TextStyle primaryBoldTextStyle = GoogleFonts.poppins()
+    .copyWith(fontWeight: FontWeight.w600, color: primaryColor);
+TextStyle normalBoldTextStyle =
     GoogleFonts.poppins().copyWith(fontWeight: FontWeight.w600);
-TextStyle textButtonStyle = textBoldStyle.copyWith(color: primaryColor);
-TextStyle inputHintStyle =
+TextStyle primaryTextStyle =
+    GoogleFonts.poppins().copyWith(color: primaryColor);
+TextStyle secondaryTextStyle =
     GoogleFonts.poppins().copyWith(color: secondaryColor);
+TextStyle normalTextStyle = GoogleFonts.poppins().copyWith(color: textColor);
 TextStyle textBtnStyle = GoogleFonts.poppins()
     .copyWith(fontWeight: FontWeight.w600, fontSize: 12, color: Colors.white);
 TextStyle appbarTitle = GoogleFonts.poppins()
@@ -29,7 +34,7 @@ SnackbarController snackbarSuccess({String? title}) {
       backgroundColor: Colors.green,
       titleText: Text(
         title!,
-        style: textBoldStyle.copyWith(color: Colors.white),
+        style: primaryBoldTextStyle.copyWith(color: Colors.white),
       ));
 }
 
@@ -38,7 +43,7 @@ SnackbarController snackbarError({String? title, String? message}) {
       backgroundColor: Colors.red,
       titleText: Text(
         title!,
-        style: textBoldStyle.copyWith(color: Colors.white),
+        style: primaryBoldTextStyle.copyWith(color: Colors.white),
       ),
       messageText: Text(
         message!,

@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                     controller: emailController,
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintStyle: inputHintStyle,
+                        hintStyle: secondaryTextStyle,
                         hintText: 'Email'),
                   ),
                 ),
@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                     obscureText: !passwordVisible,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintStyle: inputHintStyle,
+                      hintStyle: secondaryTextStyle,
                       hintText: 'Kata Sandi',
                       suffixIcon: IconButton(
                         splashRadius: 5,
@@ -126,14 +126,14 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Belum memiliki akun?', style: textBoldStyle),
+                    Text('Belum memiliki akun?', style: primaryBoldTextStyle),
                     TextButton(
                         onPressed: () {
                           Get.to(() => RegisterPage());
                         },
                         child: Text(
                           'Daftar Sekarang',
-                          style: textButtonStyle,
+                          style: primaryBoldTextStyle,
                         ))
                   ],
                 ),

@@ -56,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: nameController,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintStyle: inputHintStyle,
+                      hintStyle: secondaryTextStyle,
                       hintText: 'Nama'),
                 ),
               ),
@@ -73,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: !passwordVisible,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintStyle: inputHintStyle,
+                    hintStyle: secondaryTextStyle,
                     hintText: 'Kata Sandi',
                     suffixIcon: IconButton(
                       splashRadius: 5,
@@ -104,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: phoneController,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintStyle: inputHintStyle,
+                      hintStyle: secondaryTextStyle,
                       hintText: 'No Telp'),
                 ),
               ),
@@ -120,7 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: emailController,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintStyle: inputHintStyle,
+                      hintStyle: secondaryTextStyle,
                       hintText: 'Email'),
                 ),
               ),
@@ -143,7 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: [
                   Text(
                     'Sudah memiliki akun?',
-                    style: textBoldStyle,
+                    style: primaryBoldTextStyle,
                   ),
                   TextButton(
                       onPressed: () {
@@ -151,7 +151,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                       child: Text(
                         'Masuk Sekarang',
-                        style: textButtonStyle,
+                        style: primaryBoldTextStyle,
                       ))
                 ],
               )

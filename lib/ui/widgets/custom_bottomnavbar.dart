@@ -12,14 +12,10 @@ class CustomBottomNavbar extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 66,
-      decoration: BoxDecoration(
-          color: Colors.red,
-          border: Border(
-              top: BorderSide(width: double.infinity, color: primaryColor))),
+      color: Colors.white,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text('asdfa'),
           GestureDetector(
             onTap: () {
               if (onTap != null) {
@@ -27,12 +23,21 @@ class CustomBottomNavbar extends StatelessWidget {
               }
             },
             child: Container(
-              width: 16,
-              height: 16,
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/home_icon.png'),
-                      fit: BoxFit.contain)),
+                  color: Colors.white,
+                  border: Border(
+                      top: BorderSide(
+                          width: 2,
+                          color: (selectedIndex == 0)
+                              ? primaryColor
+                              : Colors.white))),
+              child: Image.asset(
+                'assets/images/home_icon.png',
+                width: 28,
+                height: 28,
+                color: (selectedIndex == 0) ? primaryColor : secondaryColor,
+              ),
             ),
           ),
           GestureDetector(
@@ -42,12 +47,21 @@ class CustomBottomNavbar extends StatelessWidget {
               }
             },
             child: Container(
-              width: 16,
-              height: 16,
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/trash_icon.png'),
-                      fit: BoxFit.contain)),
+                  color: Colors.white,
+                  border: Border(
+                      top: BorderSide(
+                          width: 2,
+                          color: (selectedIndex == 1)
+                              ? primaryColor
+                              : Colors.white))),
+              child: Image.asset(
+                'assets/images/trash_icon.png',
+                width: 28,
+                height: 28,
+                color: (selectedIndex == 1) ? primaryColor : secondaryColor,
+              ),
             ),
           ),
           GestureDetector(
@@ -57,12 +71,21 @@ class CustomBottomNavbar extends StatelessWidget {
               }
             },
             child: Container(
-              width: 16,
-              height: 16,
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/profile_icon.png'),
-                      fit: BoxFit.contain)),
+                  color: Colors.white,
+                  border: Border(
+                      top: BorderSide(
+                          width: 2,
+                          color: (selectedIndex == 2)
+                              ? primaryColor
+                              : Colors.white))),
+              child: Image.asset(
+                'assets/images/profile_icon.png',
+                width: 32,
+                height: 32,
+                color: (selectedIndex == 2) ? primaryColor : secondaryColor,
+              ),
             ),
           ),
         ],
