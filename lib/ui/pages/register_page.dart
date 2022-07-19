@@ -9,10 +9,12 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confPasswordController = TextEditingController();
   bool passwordVisible = false;
+  bool confPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +71,38 @@ class _RegisterPageState extends State<RegisterPage> {
                     border: Border.all(color: primaryColor),
                     color: inputBgColor),
                 child: TextField(
+                  controller: phoneController,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintStyle: secondaryTextStyle,
+                      hintText: 'No Telp'),
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                margin: EdgeInsets.only(bottom: 28),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: primaryColor),
+                    color: inputBgColor),
+                child: TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintStyle: secondaryTextStyle,
+                      hintText: 'Email'),
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                margin: EdgeInsets.only(bottom: 28),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: primaryColor),
+                    color: inputBgColor),
+                child: TextField(
                   controller: passwordController,
                   obscureText: !passwordVisible,
                   decoration: InputDecoration(
@@ -95,33 +129,33 @@ class _RegisterPageState extends State<RegisterPage> {
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                margin: EdgeInsets.only(bottom: 28),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: primaryColor),
-                    color: inputBgColor),
-                child: TextField(
-                  controller: phoneController,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintStyle: secondaryTextStyle,
-                      hintText: 'No Telp'),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 16),
                 margin: EdgeInsets.only(bottom: 38),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: primaryColor),
                     color: inputBgColor),
                 child: TextField(
-                  controller: emailController,
+                  controller: confPasswordController,
+                  obscureText: !confPasswordVisible,
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintStyle: secondaryTextStyle,
-                      hintText: 'Email'),
+                    border: InputBorder.none,
+                    hintStyle: secondaryTextStyle,
+                    hintText: 'Konfirmasi Kata Sandi',
+                    suffixIcon: IconButton(
+                      splashRadius: 5,
+                      icon: Icon(
+                        !confPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: primaryColor,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          confPasswordVisible = !confPasswordVisible;
+                        });
+                      },
+                    ),
+                  ),
                 ),
               ),
               Container(

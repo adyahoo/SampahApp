@@ -7,4 +7,5 @@ part 'custom_appbar.dart';
 part 'loading_indicator.dart';
 part 'custom_bottomnavbar.dart';
 part 'transaction_summary_card.dart';
+part 'news_card.dart';
 part 'item_card.dart';

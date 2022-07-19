@@ -20,4 +20,6 @@ List<BarangModel> mockBarangs = [
   BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
   BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
   BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
+  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
+  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
 ];

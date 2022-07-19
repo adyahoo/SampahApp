@@ -1,18 +1,14 @@
 part of 'pages.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class EditProfilePage extends StatelessWidget {
+  const EditProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppbar(
-            title: 'Profile',
-            hasBack: false,
-            hasIcon: true,
-            onPress: () {
-              Get.to(() => EditProfilePage());
-            }),
+          title: 'Edit Profile',
+        ),
         body: Center(
             child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 28, vertical: 50),

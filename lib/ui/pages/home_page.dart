@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         Text('Saldo Anda',
                             style: normalTextStyle.copyWith(fontSize: 18)),
-                        Text('Rp. 800',
+                        Text('800',
                             style: normalBoldTextStyle.copyWith(fontSize: 38)),
                         SizedBox(height: 28),
                         TransactionSummaryCard(
@@ -58,7 +58,9 @@ class HomePage extends StatelessWidget {
                           style: normalBoldTextStyle.copyWith(fontSize: 22)),
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => ListBarangPage());
+                        },
                         child: Text('Lihat Semua',
                             style: primaryTextStyle.copyWith(
                                 decoration: TextDecoration.underline)))
@@ -78,7 +80,46 @@ class HomePage extends StatelessWidget {
                     )
                   ]),
                 ),
-                SizedBox(height: 100)
+                SizedBox(height: 24),
+                //section berita
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(bottom: 4, right: 20),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom:
+                                  BorderSide(width: 2, color: primaryColor))),
+                      child: Text('Berita',
+                          style: normalBoldTextStyle.copyWith(fontSize: 22)),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Get.to(() => ListNewsPage());
+                        },
+                        child: Text('Lihat Semua',
+                            style: primaryTextStyle.copyWith(
+                                decoration: TextDecoration.underline)))
+                  ],
+                ),
+                SizedBox(height: 38),
+                Container(
+                  height: 126,
+                  width: double.infinity,
+                  child: ListView(scrollDirection: Axis.horizontal, children: [
+                    Row(
+                        children: mockNews
+                            .map((e) => NewsCard(
+                                  news: e,
+                                  isVertical: false,
+                                ))
+                            .toList())
+                  ]),
+                ),
+                SizedBox(
+                  height: 100,
+                )
               ],
             ),
           ),
