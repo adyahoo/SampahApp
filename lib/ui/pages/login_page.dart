@@ -8,9 +8,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool passwordVisible = false;
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,89 +43,43 @@ class _LoginPageState extends State<LoginPage> {
                         border: Border(
                             bottom:
                                 BorderSide(width: 2, color: primaryColor)))),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  margin: EdgeInsets.only(bottom: 38),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: primaryColor),
-                      color: inputBgColor),
-                  child: TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintStyle: secondaryTextStyle,
-                        hintText: 'Email'),
-                  ),
+                CustomInput(
+                  textEditingController: _emailController,
+                  hintText: 'Email',
+                  textInputType: TextInputType.emailAddress,
                 ),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  margin: EdgeInsets.only(bottom: 38),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: primaryColor),
-                      color: inputBgColor),
-                  child: TextField(
-                    controller: passwordController,
-                    obscureText: !passwordVisible,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintStyle: secondaryTextStyle,
-                      hintText: 'Kata Sandi',
-                      suffixIcon: IconButton(
-                        splashRadius: 5,
-                        icon: Icon(
-                          !passwordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: primaryColor,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            passwordVisible = !passwordVisible;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
+                CustomInput(
+                  textEditingController: _passwordController,
+                  hintText: 'Kata Sandi',
+                  isPassword: true,
                 ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 32),
-                  alignment: Alignment.center,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      setState(() {
-                        LoadingIndicator.of(context).show();
-                      });
+                CustomButton(
+                  title: 'Sign In',
+                  onPress: () async {
+                    setState(() {
+                      LoadingIndicator.of(context).show();
+                    });
 
-                      await context
-                          .bloc<UserCubit>()
-                          .login(emailController.text, passwordController.text);
-                      UserState state = context.bloc<UserCubit>().state;
+                    await context
+                        .bloc<UserCubit>()
+                        .login(_emailController.text, _passwordController.text);
+                    UserState state = context.bloc<UserCubit>().state;
 
-                      if (state is UserLoaded) {
-                        snackbarSuccess(title: 'Login Sukses');
-                        Get.to(() => HomePage());
-                      } else {
-                        LoadingIndicator.of(context).hide();
-                        snackbarError(
-                            title: 'Login Gagal',
-                            message: (state as UserLoadedFailed).message!);
-                      }
-                    },
-                    child: Text(
-                      'Sign In',
-                      style: textBtnStyle,
-                    ),
-                    style: primaryBtnStyle,
-                  ),
+                    if (state is UserLoaded) {
+                      snackbarSuccess(title: 'Login Sukses');
+                      Get.to(() => HomePage());
+                    } else {
+                      LoadingIndicator.of(context).hide();
+                      snackbarError(
+                          title: 'Login Gagal',
+                          message: (state as UserLoadedFailed).message!);
+                    }
+                  },
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Belum memiliki akun?', style: primaryBoldTextStyle),
+                    Text('Belum memiliki akun?', style: normalBoldTextStyle),
                     TextButton(
                         onPressed: () {
                           Get.to(() => RegisterPage());

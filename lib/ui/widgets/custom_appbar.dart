@@ -4,14 +4,14 @@ class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final bool hasBack;
   final bool hasIcon;
-  final Function? onPress;
+  final Function? onIconPress;
 
   const CustomAppbar(
       {Key? key,
       required this.title,
       this.hasBack = true,
       this.hasIcon = false,
-      this.onPress})
+      this.onIconPress})
       : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
       actions: [
         IconButton(
           splashRadius: 25,
-          onPressed: !hasIcon ? null : () => onPress!(),
+          onPressed: !hasIcon ? null : () => onIconPress!(),
           icon: Icon(Icons.edit_outlined),
           disabledColor: Colors.white,
         )

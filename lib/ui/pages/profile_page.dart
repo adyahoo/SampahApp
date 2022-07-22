@@ -10,79 +10,164 @@ class ProfilePage extends StatelessWidget {
             title: 'Profile',
             hasBack: false,
             hasIcon: true,
-            onPress: () {
+            onIconPress: () {
               Get.to(() => EditProfilePage());
             }),
-        body: Center(
-            child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 28, vertical: 50),
-          child: Column(
-            children: [
-              //image profile
-              Container(
-                width: 108,
-                height: 108,
-                margin: EdgeInsets.only(bottom: 60),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/profile.png',
-                        ),
-                        fit: BoxFit.cover)),
+        body: ListView(
+          children: [
+            Container(
+              color: Colors.white,
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //image profile
+                  Center(
+                    child: Container(
+                      width: 108,
+                      height: 108,
+                      margin: EdgeInsets.only(bottom: 30),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/profile.png',
+                              ),
+                              fit: BoxFit.cover)),
+                    ),
+                  ),
+                  //user information
+                  Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(horizontal: 28),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SectionTitle(title: 'Info Profil'),
+                          SizedBox(height: 30),
+                          Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.only(bottom: 24),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                        width: 100,
+                                        child: Text('Nama',
+                                            style: normalBoldTextStyle)),
+                                    Text('Bagas Gustama',
+                                        style: normalBoldTextStyle),
+                                  ])),
+                          Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.only(bottom: 24),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                        width: 100,
+                                        child: Text('Alamat',
+                                            style: normalBoldTextStyle)),
+                                    Text('Bagas Gustama',
+                                        style: normalBoldTextStyle),
+                                  ])),
+                          Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.only(bottom: 24),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                        width: 100,
+                                        child: Text('Nomor HP',
+                                            style: normalBoldTextStyle)),
+                                    Text('Bagas Gustama',
+                                        style: normalBoldTextStyle),
+                                  ])),
+                          Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.only(bottom: 24),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                        width: 100,
+                                        child: Text('Email',
+                                            style: normalBoldTextStyle)),
+                                    Text('Bagas Gustama',
+                                        style: normalBoldTextStyle),
+                                  ])),
+                        ],
+                      )),
+                  CustomDivider(),
+                  //history section
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 28, vertical: 38),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SectionTitle(title: 'History'),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                  width: 70,
+                                  child: Image.asset(
+                                      'assets/images/pemasukan_icon.png',
+                                      width: 32,
+                                      height: 28,
+                                      color: primaryColor)),
+                              Text('Pemasukan', style: normalBoldTextStyle)
+                            ],
+                          ),
+                          SizedBox(height: 32),
+                          Row(
+                            children: [
+                              Container(
+                                  width: 70,
+                                  child: Image.asset(
+                                      'assets/images/penukaran_icon.png',
+                                      width: 32,
+                                      height: 28,
+                                      color: primaryColor)),
+                              Text('Penukaran', style: normalBoldTextStyle)
+                            ],
+                          ),
+                        ]),
+                  ),
+                  CustomDivider(),
+                  //setting section
+                  Container(
+                      width: double.infinity,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 38, horizontal: 28),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SectionTitle(title: 'Setting'),
+                          SizedBox(
+                            height: 24,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                  width: 70,
+                                  child: Image.asset('assets/images/logout.png',
+                                      width: 32,
+                                      height: 28,
+                                      color: primaryColor)),
+                              Text('Logout', style: normalBoldTextStyle)
+                            ],
+                          ),
+                        ],
+                      )),
+                ],
               ),
-              //user information
-              Container(
-                  width: double.infinity,
-                  height: 50,
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: primaryColor),
-                      color: inputBgColor),
-                  child: Text('Bagas Gustama', style: normalBoldTextStyle)),
-              SizedBox(
-                height: 25,
-              ),
-              Container(
-                  width: double.infinity,
-                  height: 50,
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: primaryColor),
-                      color: inputBgColor),
-                  child: Text('Jalan Raya', style: normalBoldTextStyle)),
-              SizedBox(
-                height: 25,
-              ),
-              Container(
-                  width: double.infinity,
-                  height: 50,
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: primaryColor),
-                      color: inputBgColor),
-                  child: Text('09809890890', style: normalBoldTextStyle)),
-              SizedBox(
-                height: 25,
-              ),
-              Container(
-                  width: double.infinity,
-                  height: 50,
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: primaryColor),
-                      color: inputBgColor),
-                  child: Text('bagas@gmail.com', style: normalBoldTextStyle)),
-            ],
-          ),
-        )));
+            )
+          ],
+        ));
   }
 }

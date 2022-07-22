@@ -25,7 +25,7 @@ class ItemCard extends StatelessWidget {
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10))),
               child: Image.asset(
-                'assets/images/' + barang.image!,
+                'assets/images/' + barang.gambar!,
                 height: 100,
                 fit: BoxFit.contain,
               ),
@@ -39,10 +39,10 @@ class ItemCard extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border(
                       bottom: BorderSide(width: 2, color: primaryColor))),
-              child: Text(barang.name!,
+              child: Text(barang.nama!,
                   style: normalTextStyle.copyWith(fontSize: 12)),
             ),
-            Text('Rp. ' + barang.price.toString(),
+            Text('Rp. ' + barang.harga.toString(),
                 style: normalBoldTextStyle.copyWith(fontSize: 21))
           ],
         ),

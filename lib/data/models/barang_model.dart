@@ -1,25 +1,25 @@
 part of 'models.dart';
 
 class BarangModel extends Equatable {
-  final String? name;
-  final int? price;
-  final String? image;
+  final String? nama;
+  final int? harga;
+  final String? gambar;
 
-  BarangModel({this.name, this.price, this.image});
+  BarangModel({this.nama, this.harga, this.gambar});
 
   @override
-  List<Object?> get props => [name, price, image];
+  List<Object?> get props => [nama, harga, gambar];
 }
 
 List<BarangModel> mockBarangs = [
-  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
-  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
-  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
-  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
-  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
-  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
-  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
-  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
-  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
-  BarangModel(name: 'Termos', price: 50000, image: 'home_icon.png'),
+  BarangModel(nama: 'Termos', harga: 50000, gambar: 'home_icon.png'),
+  BarangModel(nama: 'Termos', harga: 50000, gambar: 'home_icon.png'),
+  BarangModel(nama: 'Termos', harga: 50000, gambar: 'home_icon.png'),
+  BarangModel(nama: 'Termos', harga: 50000, gambar: 'home_icon.png'),
+  BarangModel(nama: 'Termos', harga: 50000, gambar: 'home_icon.png'),
+  BarangModel(nama: 'Termos', harga: 50000, gambar: 'home_icon.png'),
+  BarangModel(nama: 'Termos', harga: 50000, gambar: 'home_icon.png'),
+  BarangModel(nama: 'Termos', harga: 50000, gambar: 'home_icon.png'),
+  BarangModel(nama: 'Termos', harga: 50000, gambar: 'home_icon.png'),
+  BarangModel(nama: 'Termos', harga: 50000, gambar: 'home_icon.png'),
 ];

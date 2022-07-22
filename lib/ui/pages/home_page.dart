@@ -48,15 +48,7 @@ class HomePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: EdgeInsets.only(bottom: 4, right: 20),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom:
-                                  BorderSide(width: 2, color: primaryColor))),
-                      child: Text('Penukaran',
-                          style: normalBoldTextStyle.copyWith(fontSize: 22)),
-                    ),
+                    SectionTitle(title: 'Penukaran'),
                     TextButton(
                         onPressed: () {
                           Get.to(() => ListBarangPage());
@@ -85,15 +77,7 @@ class HomePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: EdgeInsets.only(bottom: 4, right: 20),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom:
-                                  BorderSide(width: 2, color: primaryColor))),
-                      child: Text('Berita',
-                          style: normalBoldTextStyle.copyWith(fontSize: 22)),
-                    ),
+                    SectionTitle(title: 'Berita'),
                     TextButton(
                         onPressed: () {
                           Get.to(() => ListNewsPage());

@@ -4,3 +4,4 @@ part 'user_model.dart';
 part 'api_return_value.dart';
 part 'barang_model.dart';
 part 'news_model.dart';
+part 'sampah_model.dart';

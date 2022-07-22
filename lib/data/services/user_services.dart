@@ -10,7 +10,7 @@ class UserService {
     client = http.Client();
     String url = baseUrl + '/login';
 
-    var response = await client.post(url,
+    var response = await client.post(Uri.parse(url),
         headers: {"Content-Type": "application/json"},
         body:
             jsonEncode(<String, String>{"email": email, "password": password}));
