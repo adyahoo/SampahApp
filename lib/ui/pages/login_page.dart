@@ -8,11 +8,34 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _emailController = TextEditingController();
+  TextEditingController _teleponController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  void handleLogin() async {
+    setState(() {
+      context.loaderOverlay.show();
+    });
+
+    await context
+        .read<UserCubit>()
+        .login(_teleponController.text, _passwordController.text);
+    UserState state = context.read<UserCubit>().state;
+
+    if (state is UserLoaded) {
+      context.loaderOverlay.hide();
+      snackbarSuccess(title: 'Login Sukses');
+      Get.to(() => MainPage());
+    } else {
+      context.loaderOverlay.hide();
+      snackbarError(
+          title: 'Login Gagal', message: (state as UserLoadedFailed).message!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    context.watch<CommonCubit>().getBanjar();
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -44,9 +67,9 @@ class _LoginPageState extends State<LoginPage> {
                             bottom:
                                 BorderSide(width: 2, color: primaryColor)))),
                 CustomInput(
-                  textEditingController: _emailController,
-                  hintText: 'Email',
-                  textInputType: TextInputType.emailAddress,
+                  textEditingController: _teleponController,
+                  hintText: 'Telepon',
+                  textInputType: TextInputType.phone,
                 ),
                 CustomInput(
                   textEditingController: _passwordController,
@@ -55,26 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 CustomButton(
                   title: 'Sign In',
-                  onPress: () async {
-                    setState(() {
-                      LoadingIndicator.of(context).show();
-                    });
-
-                    await context
-                        .bloc<UserCubit>()
-                        .login(_emailController.text, _passwordController.text);
-                    UserState state = context.bloc<UserCubit>().state;
-
-                    if (state is UserLoaded) {
-                      snackbarSuccess(title: 'Login Sukses');
-                      Get.to(() => HomePage());
-                    } else {
-                      LoadingIndicator.of(context).hide();
-                      snackbarError(
-                          title: 'Login Gagal',
-                          message: (state as UserLoadedFailed).message!);
-                    }
-                  },
+                  onPress: () => handleLogin(),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

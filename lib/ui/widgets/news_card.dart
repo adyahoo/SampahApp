@@ -1,52 +1,64 @@
 part of 'widgets.dart';
 
 class NewsCard extends StatelessWidget {
-  final NewsModel news;
+  final EdukasiModel edukasi;
   final bool isVertical;
+  final Function? onPress;
 
-  const NewsCard({Key? key, required this.news, required this.isVertical})
+  const NewsCard(
+      {Key? key, required this.edukasi, required this.isVertical, this.onPress})
       : super(key: key);
 
   Widget horizontalCard() {
     return Container(
         width: 284,
         height: 126,
-        child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          elevation: 4,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 126,
-                height: 126,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/' + news.image!),
-                        fit: BoxFit.cover),
-                    borderRadius: BorderRadius.circular(5)),
-              ),
-              Container(
-                width: 142,
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      news.title!,
-                      style: primaryBoldTextStyle,
-                    ),
-                    Text(
-                      news.description!,
-                      style: normalTextStyle.copyWith(fontSize: 12),
-                      maxLines: 4,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: true,
-                    )
-                  ],
+        child: GestureDetector(
+          onTap: () => onPress!(),
+          child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            elevation: 4,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 126,
+                  height: 126,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/chaeyoung.jpg'),
+                          fit: BoxFit.cover),
+                      borderRadius: BorderRadius.circular(5)),
                 ),
-              )
-            ],
+                Container(
+                  width: 142,
+                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        edukasi.judul!,
+                        style: primaryBoldTextStyle,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Text(
+                        edukasi.konten!,
+                        style: normalTextStyle.copyWith(fontSize: 12),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ));
   }
@@ -55,41 +67,51 @@ class NewsCard extends StatelessWidget {
     return Container(
       width: 180,
       height: 254,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        elevation: 4,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 180,
-              height: 126,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/' + news.image!),
-                      fit: BoxFit.contain)),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    news.title!,
-                    style: primaryBoldTextStyle,
-                  ),
-                  Text(
-                    news.description!,
-                    style: normalTextStyle.copyWith(fontSize: 12),
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                    softWrap: true,
-                  )
-                ],
+      child: GestureDetector(
+        onTap: () => onPress!(),
+        child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+          elevation: 4,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: 180,
+                height: 126,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/chaeyoung.jpg'),
+                        fit: BoxFit.contain)),
               ),
-            )
-          ],
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      edukasi.judul!,
+                      style: primaryBoldTextStyle,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Text(
+                      edukasi.konten!,
+                      style: normalTextStyle.copyWith(fontSize: 12),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

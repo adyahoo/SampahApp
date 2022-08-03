@@ -40,6 +40,30 @@ class CustomBottomNavbar extends StatelessWidget {
               ),
             ),
           ),
+          // GestureDetector(
+          //   onTap: () {
+          //     if (onTap != null) {
+          //       onTap!(1);
+          //     }
+          //   },
+          //   child: Container(
+          //     padding: EdgeInsets.all(16),
+          //     decoration: BoxDecoration(
+          //         color: Colors.white,
+          //         border: Border(
+          //             top: BorderSide(
+          //                 width: 2,
+          //                 color: (selectedIndex == 1)
+          //                     ? primaryColor
+          //                     : Colors.white))),
+          //     child: Image.asset(
+          //       'assets/images/trash_icon.png',
+          //       width: 28,
+          //       height: 28,
+          //       color: (selectedIndex == 1) ? primaryColor : secondaryColor,
+          //     ),
+          //   ),
+          // ),
           GestureDetector(
             onTap: () {
               if (onTap != null) {
@@ -57,34 +81,10 @@ class CustomBottomNavbar extends StatelessWidget {
                               ? primaryColor
                               : Colors.white))),
               child: Image.asset(
-                'assets/images/trash_icon.png',
-                width: 28,
-                height: 28,
-                color: (selectedIndex == 1) ? primaryColor : secondaryColor,
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              if (onTap != null) {
-                onTap!(2);
-              }
-            },
-            child: Container(
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border(
-                      top: BorderSide(
-                          width: 2,
-                          color: (selectedIndex == 2)
-                              ? primaryColor
-                              : Colors.white))),
-              child: Image.asset(
                 'assets/images/profile_icon.png',
                 width: 32,
                 height: 32,
-                color: (selectedIndex == 2) ? primaryColor : secondaryColor,
+                color: (selectedIndex == 1) ? primaryColor : secondaryColor,
               ),
             ),
           ),

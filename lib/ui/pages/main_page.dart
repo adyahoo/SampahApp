@@ -27,7 +27,7 @@ class _MainPageState extends State<MainPage> {
                 _selectedPage = index;
               });
             },
-            children: [HomePage(), DaftarSampahPage(), ProfilePage()],
+            children: [HomePage(), ProfilePage()],
           )),
           Align(
               alignment: Alignment.bottomCenter,

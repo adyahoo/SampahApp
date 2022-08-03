@@ -6,6 +6,8 @@ Color tertiaryColor = "E8EAE6".toColor();
 Color textColor = "2B2B2B".toColor();
 Color inputBgColor = "F9F9F9".toColor();
 Color dividerColor = "EFEFEF".toColor();
+Color shimmerBaseColor = Colors.grey[400]!;
+Color shimmerHighlightColor = Colors.grey[300]!;
 
 TextStyle titleStyle = GoogleFonts.poppins()
     .copyWith(fontWeight: FontWeight.w600, fontSize: 22, color: textColor);

@@ -1,14 +1,24 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc/src/bloc_provider.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:sampah/data/cubits/cubit.dart';
+import 'package:sampah/data/cubits/edukasi_cubit.dart';
 import 'package:sampah/data/models/models.dart';
+import 'package:sampah/main.dart';
 import 'package:sampah/shared/shared.dart';
 import 'package:sampah/ui/widgets/widgets.dart';
+
+import '../../data/services/services.dart';
 
 part 'login_page.dart';
 part 'register_page.dart';
@@ -19,5 +29,11 @@ part 'profile_page.dart';
 part 'edit_profile_page.dart';
 part 'list_news_page.dart';
 part 'list_barang_page.dart';
+part 'list_ranking_page.dart';
+part 'penukaran_page.dart';
 part 'sampah_form_page.dart';
 part 'daftar_sampah_page.dart';
+part 'detail_news_page.dart';
+part 'history_penukaran_page.dart';
+part 'list_pemasukan_page.dart';
+part 'list_penukaran_page.dart';

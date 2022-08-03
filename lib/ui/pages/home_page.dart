@@ -7,106 +7,132 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(16),
-            child: Column(
-              children: [
-                //header welcome user
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.only(bottom: 56),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Hi Bagas', style: primaryTextStyle),
-                      Text('Welcome Back!',
-                          style: titleStyle.copyWith(color: primaryColor)),
-                    ],
-                  ),
-                ),
-                //section saldo & user transaction
-                Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(bottom: 24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text('Saldo Anda',
-                            style: normalTextStyle.copyWith(fontSize: 18)),
-                        Text('800',
-                            style: normalBoldTextStyle.copyWith(fontSize: 38)),
-                        SizedBox(height: 28),
-                        TransactionSummaryCard(
-                            totalTransaction: 12,
-                            totalIncome: 15,
-                            totalWaiting: 20)
-                      ],
-                    )),
-                //section penukaran
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SectionTitle(title: 'Penukaran'),
-                    TextButton(
-                        onPressed: () {
-                          Get.to(() => ListBarangPage());
-                        },
-                        child: Text('Lihat Semua',
-                            style: primaryTextStyle.copyWith(
-                                decoration: TextDecoration.underline)))
-                  ],
-                ),
-                SizedBox(height: 38),
-                Container(
-                  height: 228,
-                  width: double.infinity,
-                  child: ListView(scrollDirection: Axis.horizontal, children: [
-                    Row(
-                      children: mockBarangs
-                          .map((e) => ItemCard(
-                                barang: e,
-                              ))
-                          .toList(),
-                    )
-                  ]),
-                ),
-                SizedBox(height: 24),
-                //section berita
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SectionTitle(title: 'Berita'),
-                    TextButton(
-                        onPressed: () {
-                          Get.to(() => ListNewsPage());
-                        },
-                        child: Text('Lihat Semua',
-                            style: primaryTextStyle.copyWith(
-                                decoration: TextDecoration.underline)))
-                  ],
-                ),
-                SizedBox(height: 38),
-                Container(
-                  height: 126,
-                  width: double.infinity,
-                  child: ListView(scrollDirection: Axis.horizontal, children: [
-                    Row(
-                        children: mockNews
-                            .map((e) => NewsCard(
-                                  news: e,
-                                  isVertical: false,
-                                ))
-                            .toList())
-                  ]),
-                ),
-                SizedBox(
-                  height: 100,
-                )
-              ],
-            ),
-          ),
+        child: FutureBuilder(
+          future: Future.wait([
+            getLocalUser(),
+            context.watch<EdukasiCubit>().getNewestEdukasi()
+          ]),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.done:
+                if (snapshot.hasData) {
+                  UserModel user = snapshot.data[0] as UserModel;
+                  return SingleChildScrollView(
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          //header welcome user
+                          Container(
+                            width: double.infinity,
+                            margin: EdgeInsets.only(bottom: 56),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Hi ${user.nama}',
+                                        style: primaryTextStyle),
+                                    Text('Welcome Back!',
+                                        style: titleStyle.copyWith(
+                                            color: primaryColor)),
+                                  ],
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.chat_outlined),
+                                  color: primaryColor,
+                                  iconSize: 24,
+                                )
+                              ],
+                            ),
+                          ),
+                          //section saldo & user transaction
+                          Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.only(bottom: 24),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text('Saldo Anda',
+                                      style: normalTextStyle.copyWith(
+                                          fontSize: 18)),
+                                  Text('Rp. ${user.idSaldo}',
+                                      style: normalBoldTextStyle.copyWith(
+                                          fontSize: 38)),
+                                  SizedBox(height: 28),
+                                  TransactionSummaryCard(
+                                    onPress: () =>
+                                        {Get.to(() => PenukaranPage())},
+                                  )
+                                ],
+                              )),
+                          //section berita
+                          SectionTitle(
+                            title: 'Berita',
+                            hasButton: true,
+                            btnTitle: 'Lihat Semua',
+                            onPress: () {
+                              Get.to(() => ListNewsPage());
+                            },
+                          ),
+                          SizedBox(height: 18),
+                          BlocBuilder<EdukasiCubit, EdukasiState>(
+                              builder: ((context, state) =>
+                                  (state is ListNewestEdukasiLoaded)
+                                      ? Container(
+                                          height: 126,
+                                          width: double.infinity,
+                                          child: ListView(
+                                              scrollDirection: Axis.horizontal,
+                                              children: state.edukasis!
+                                                  .map((e) => NewsCard(
+                                                      onPress: () => Get.to(
+                                                          () => DetailNewsPage(
+                                                              id: e.id!)),
+                                                      edukasi: e,
+                                                      isVertical: false))
+                                                  .toList()),
+                                        )
+                                      : SizedBox())),
+                          SizedBox(
+                            height: 50,
+                          ),
+                          //section ranking
+                          SectionTitle(
+                            title: 'Ranking',
+                            hasButton: true,
+                            btnTitle: 'Lihat Semua',
+                            onPress: () {
+                              Get.to(ListRankingPage());
+                            },
+                          ),
+                          SizedBox(
+                            height: 18,
+                          ),
+                          RankingCard(
+                            saldo: 1000,
+                            username: 'mamank',
+                            index: 1,
+                          ),
+                          SizedBox(
+                            height: 100,
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  return LoadingIndicator();
+                }
+              case ConnectionState.waiting:
+                return LoadingIndicator();
+              default:
+                return SizedBox();
+            }
+          },
         ),
       ),
     );

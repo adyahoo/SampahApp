@@ -1,7 +1,9 @@
 part of 'pages.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
+  final UserModel? user;
+
+  const EditProfilePage({Key? key, required this.user}) : super(key: key);
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -9,20 +11,58 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   XFile? _imagePicked = null;
+  DateTime? _selectedDate;
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+  String? _selectedGender;
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.parse(widget.user!.tglLahir!),
+        firstDate: DateTime(1990),
+        lastDate: DateTime.now());
+
+    if (picked != null && picked != DateTime.now())
+      setState(() {
+        _selectedDate = picked;
+      });
+  }
+
+  void handleEditProfile() async {
+    setState(() {
+      context.loaderOverlay.show();
+    });
+
+    String bornDate = DateFormat('yyyy-MM-dd').format(_selectedDate);
+
+    await context.read<UserCubit>().editProfile(
+        File(_imagePicked!.path),
+        _nameController.text,
+        bornDate,
+        _phoneController.text,
+        _selectedGender!,
+        _addressController.text);
+    var state = context.read<UserCubit>().state;
+
+    if (state is UserLoaded) {
+      Get.back();
+      context.loaderOverlay.hide();
+      snackbarSuccess(title: 'Mengubah Profile Berhasil');
+    } else {
+      context.loaderOverlay.hide();
+      snackbarError(
+          title: 'Gagal Mengubah Profile',
+          message: (state as UserLoadedFailed).message);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _nameController =
-        TextEditingController(text: 'mamank');
-    TextEditingController _addressController =
-        TextEditingController(text: 'jalan');
-    TextEditingController _phoneController =
-        TextEditingController(text: '09898798679');
-    TextEditingController _emailController =
-        TextEditingController(text: 'mamank@mamank.com');
-    final ImagePicker _picker = ImagePicker();
-
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: CustomAppbar(
           title: 'Edit Profile',
         ),
@@ -83,18 +123,46 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   label: 'No Telp',
                   textInputType: TextInputType.number,
                 ),
-                CustomInput(
-                  textEditingController: _emailController,
-                  hintText: 'Email',
+                CustomDatePicker(
+                    selectedDate: _selectedDate.toString().split(' ')[0],
+                    onPress: () => _selectDate(context),
+                    hasLabel: true,
+                    label: 'Tanggal Lahir'),
+                CustomDropdown(
                   hasLabel: true,
-                  label: 'Email',
-                  textInputType: TextInputType.emailAddress,
+                  label: 'Jenis Kelamin',
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    underline: SizedBox(),
+                    hint:
+                        Text('Pilih Jenis Kelamin', style: secondaryTextStyle),
+                    value: _selectedGender,
+                    items: [
+                      DropdownMenuItem(
+                        child: Text('Laki-Laki',
+                            style:
+                                normalTextStyle.copyWith(color: Colors.black)),
+                        value: 'laki-laki',
+                      ),
+                      DropdownMenuItem(
+                        child: Text('Perempuan',
+                            style:
+                                normalTextStyle.copyWith(color: Colors.black)),
+                        value: 'perempuan',
+                      ),
+                    ],
+                    onChanged: ((value) {
+                      setState(() {
+                        _selectedGender = value;
+                      });
+                    }),
+                  ),
                 ),
                 //section save button
                 SizedBox(height: 32),
                 CustomButton(
                   title: 'Simpan',
-                  onPress: () {},
+                  onPress: () => handleEditProfile(),
                 ),
                 CustomButton(
                   title: 'Batal',

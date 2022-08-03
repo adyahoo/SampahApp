@@ -1,33 +1,67 @@
 part of 'models.dart';
 
+@HiveType(typeId: 0)
 class UserModel extends Equatable {
+  @HiveField(0)
   final int? id;
+  @HiveField(1)
   final String? nama;
-  final String? email;
+  @HiveField(2)
+  final String? telepon;
+  @HiveField(3)
   final String? tglLahir;
-  final double? lat;
-  final double? long;
+  @HiveField(4)
+  final String? alamat;
+  @HiveField(5)
+  final String? jenisKelamin;
+  @HiveField(6)
+  final String? fotoProfil;
+  @HiveField(7)
   final int? idSaldo;
+  @HiveField(8)
+  final int? idBanjar;
+  @HiveField(9)
+  final String? kodeNasabah;
+  final BanjarModel? banjar;
   static String? token;
 
   UserModel(
       {this.id,
       this.nama,
-      this.email,
+      this.telepon,
       this.tglLahir,
-      this.lat,
-      this.long,
-      this.idSaldo});
+      this.alamat,
+      this.jenisKelamin,
+      this.fotoProfil,
+      this.idSaldo,
+      this.idBanjar,
+      this.banjar,
+      this.kodeNasabah});
 
   factory UserModel.fromJson(Map<String, dynamic> data) => UserModel(
       id: data['id'],
       nama: data['nama'],
-      email: data['email'],
+      telepon: data['telepon'],
       tglLahir: data['tgl_lahir'],
-      lat: data['lat'],
-      long: data['long'],
-      idSaldo: data['id_saldo']);
+      alamat: data['alamat'],
+      jenisKelamin: data['jenis_kelamin'],
+      fotoProfil: data['foto_profil'],
+      idSaldo: data['id_saldo'],
+      idBanjar: data['banjar_id'],
+      kodeNasabah: data['kode_nasabah'],
+      banjar: BanjarModel.fromJson(data['banjar']));
 
   @override
-  List<Object?> get props => [id, nama, email, tglLahir, lat, long, idSaldo];
+  List<Object?> get props => [
+        id,
+        nama,
+        telepon,
+        tglLahir,
+        alamat,
+        jenisKelamin,
+        fotoProfil,
+        idSaldo,
+        idBanjar,
+        kodeNasabah
+      ];
 }

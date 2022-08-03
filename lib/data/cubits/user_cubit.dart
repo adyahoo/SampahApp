@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sampah/data/models/models.dart';
@@ -9,8 +12,9 @@ part 'user_state.dart';
 class UserCubit extends Cubit<UserState> {
   UserCubit() : super(UserInitial());
 
-  Future<void> login(String email, String password) async {
-    ApiReturnValue<UserModel> result = await UserService.login(email, password);
+  Future<void> login(String telepon, String password) async {
+    ApiReturnValue<UserModel> result =
+        await UserService.login(telepon, password);
 
     if (result.value != null) {
       emit(UserLoaded(result.value));
@@ -19,7 +23,54 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<void> register(String user, String password) async {}
+  Future<void> register(
+    String phone,
+    String name,
+    String bornDate,
+    String password,
+    String confPassword,
+    String address,
+    int idBanjar,
+  ) async {
+    ApiReturnValue<UserModel> result = await UserService.register(
+        phone, name, bornDate, password, confPassword, address, idBanjar);
 
-  Future<void> logout() async {}
+    if (result.status == true) {
+      emit(UserRegistered(message: result.message));
+    } else {
+      emit(UserLoadedFailed(result.message));
+    }
+  }
+
+  Future<void> logout() async {
+    ApiReturnValue<UserModel> result = await UserService.logout();
+
+    if (result.status == true) {
+      emit(UserLoggedOut(result.message!));
+    } else {
+      emit(UserLoadedFailed(result.message));
+    }
+  }
+
+  Future<void> getProfile() async {
+    ApiReturnValue<UserModel> result = await UserService.getProfile();
+
+    if (result.status == true) {
+      emit(UserLoaded(result.value));
+    } else {
+      emit(UserLoadedFailed(result.message));
+    }
+  }
+
+  Future<void> editProfile(File image, String name, String bornDate,
+      String phone, String gender, String address) async {
+    ApiReturnValue<UserModel> result = await UserService.updateProfile(
+        image, name, bornDate, phone, gender, address);
+
+    if (result.status == true) {
+      emit(UserLoaded(result.value));
+    } else {
+      emit(UserLoadedFailed(result.message));
+    }
+  }
 }
