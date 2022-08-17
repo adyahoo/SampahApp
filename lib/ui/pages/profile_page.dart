@@ -10,7 +10,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    context.watch<UserCubit>().getProfile();
+    context.read<UserCubit>().getProfile();
 
     void handleLogout() async {
       return showDialog(
@@ -33,24 +33,24 @@ class _ProfilePageState extends State<ProfilePage> {
                 CustomButton(
                   title: 'Iya',
                   isPrimary: false,
-                  // onPress: () async {
-                  //   Get.back();
-                  //   context.loaderOverlay.show();
+                  onPress: () async {
+                    // Get.back();
+                    context.loaderOverlay.show();
 
-                  //   await context.bloc<UserCubit>().logout();
-                  //   var state = context.bloc<UserCubit>().state;
+                    await context.read<UserCubit>().logout();
+                    UserState state = context.read<UserCubit>().state;
 
-                  //   if (state is UserLoggedOut) {
-                  //     context.loaderOverlay.hide();
-                  //     snackbarSuccess(title: "Logout Berhasil");
-                  //     Get.off(() => LoginPage());
-                  //   } else {
-                  //     context.loaderOverlay.hide();
-                  //     snackbarError(
-                  //         title: "Logout Gagal, " +
-                  //             (state as UserLoadedFailed).message!);
-                  //   }
-                  // },
+                    if (state is UserLoggedOut) {
+                      context.loaderOverlay.hide();
+                      snackbarSuccess(title: "Logout Berhasil");
+                      Get.off(() => LoginPage());
+                    } else {
+                      context.loaderOverlay.hide();
+                      snackbarError(
+                          title: "Logout Gagal, " +
+                              (state as UserLoadedFailed).message!);
+                    }
+                  },
                 ),
               ],
             );

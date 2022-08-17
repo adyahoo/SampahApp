@@ -1,0 +1,21 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:sampah/data/models/models.dart';
+import 'package:sampah/data/services/services.dart';
+
+part 'penukaran_state.dart';
+
+class PenukaranCubit extends Cubit<PenukaranState> {
+  PenukaranCubit() : super(PenukaranInitial());
+
+  Future<void> tukarSaldo(int saldo) async {
+    ApiReturnValue<PenukaranModel> result =
+        await PenukaranServices.tukarSaldo(saldo);
+
+    if (result.status == true) {
+      emit(StoreSaldoSuccess(result.message));
+    } else {
+      emit(StoreSaldoFailed(result.message));
+    }
+  }
+}

@@ -51,7 +51,7 @@ class NewsCard extends StatelessWidget {
                         height: 12,
                       ),
                       Text(
-                        edukasi.konten!,
+                        edukasi.slug!,
                         style: normalTextStyle.copyWith(fontSize: 12),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -105,7 +105,7 @@ class NewsCard extends StatelessWidget {
                       height: 12,
                     ),
                     Text(
-                      edukasi.konten!,
+                      edukasi.slug!,
                       style: normalTextStyle.copyWith(fontSize: 12),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,

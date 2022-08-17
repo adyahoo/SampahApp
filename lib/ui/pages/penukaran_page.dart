@@ -12,7 +12,7 @@ class PenukaranPage extends StatefulWidget {
 class _PenukaranPageState extends State<PenukaranPage> {
   TextEditingController _tukarController = TextEditingController(text: '0');
 
-  void handlePenukaran() {
+  void handlePenukaran() async {
     if (int.parse(_tukarController.text) > widget.saldo! ||
         int.parse(_tukarController.text) == 0) {
       snackbarError(
@@ -20,10 +20,22 @@ class _PenukaranPageState extends State<PenukaranPage> {
     } else {
       context.loaderOverlay.show();
 
-      Future.delayed(Duration(milliseconds: 1000), () {
-        context.loaderOverlay.hide();
+      await context
+          .read<PenukaranCubit>()
+          .tukarSaldo(int.parse(_tukarController.text));
+      PenukaranState state = context.read<PenukaranCubit>().state;
+
+      if (state is StoreSaldoSuccess) {
         Get.back();
-      });
+        context.loaderOverlay.hide();
+        snackbarSuccess(
+            title: 'Berhasil Menukar Saldo, Tunggu Konfirmasi Admin');
+      } else {
+        context.loaderOverlay.hide();
+        snackbarError(
+            title: 'Terjadi Kesalahan',
+            message: (state as StoreSaldoFailed).message);
+      }
     }
   }
 

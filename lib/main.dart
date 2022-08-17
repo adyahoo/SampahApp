@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => CommonCubit()),
         BlocProvider(create: (_) => EdukasiCubit()),
         BlocProvider(create: (_) => RankingCubit()),
+        BlocProvider(create: (_) => PenukaranCubit()),
       ],
       child: GlobalLoaderOverlay(
         useDefaultLoading: false,

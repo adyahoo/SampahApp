@@ -13,6 +13,7 @@ part 'user_services.dart';
 part 'edukasi_services.dart';
 part 'common_services.dart';
 part 'ranking_services.dart';
+part 'penukaran_services.dart';
 
 String TOKEN = 'TOKEN';
 String USER_BOX = 'USER_BOX';
