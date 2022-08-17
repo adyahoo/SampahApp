@@ -2,7 +2,7 @@ part of 'widgets.dart';
 
 class RankingCard extends StatelessWidget {
   final String? username;
-  final int? saldo;
+  final String? saldo;
   final int? index;
 
   const RankingCard({Key? key, this.saldo, this.username, this.index}) : super(key: key);

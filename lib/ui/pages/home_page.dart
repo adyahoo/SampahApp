@@ -1,8 +1,13 @@
 part of 'pages.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,7 +15,8 @@ class HomePage extends StatelessWidget {
         child: FutureBuilder(
           future: Future.wait([
             getLocalUser(),
-            context.watch<EdukasiCubit>().getNewestEdukasi()
+            context.read<EdukasiCubit>().getNewestEdukasi(),
+            context.read<RankingCubit>().getTopRanking()
           ]),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             switch (snapshot.connectionState) {
@@ -59,13 +65,16 @@ class HomePage extends StatelessWidget {
                                   Text('Saldo Anda',
                                       style: normalTextStyle.copyWith(
                                           fontSize: 18)),
-                                  Text('Rp. ${user.idSaldo}',
+                                  Text('Rp. ${user.saldo}',
                                       style: normalBoldTextStyle.copyWith(
                                           fontSize: 38)),
                                   SizedBox(height: 28),
                                   TransactionSummaryCard(
-                                    onPress: () =>
-                                        {Get.to(() => PenukaranPage())},
+                                    onPress: () => {
+                                      Get.to(() => PenukaranPage(
+                                            saldo: user.saldo,
+                                          ))?.then((value) => setState(() {}))
+                                    },
                                   )
                                 ],
                               )),
@@ -75,7 +84,8 @@ class HomePage extends StatelessWidget {
                             hasButton: true,
                             btnTitle: 'Lihat Semua',
                             onPress: () {
-                              Get.to(() => ListNewsPage());
+                              Get.to(() => ListNewsPage())
+                                  ?.then((value) => setState((() {})));
                             },
                           ),
                           SizedBox(height: 18),
@@ -91,7 +101,9 @@ class HomePage extends StatelessWidget {
                                                   .map((e) => NewsCard(
                                                       onPress: () => Get.to(
                                                           () => DetailNewsPage(
-                                                              id: e.id!)),
+                                                              id: e.id!))?.then(
+                                                          (value) =>
+                                                              setState(() {})),
                                                       edukasi: e,
                                                       isVertical: false))
                                                   .toList()),
@@ -106,16 +118,31 @@ class HomePage extends StatelessWidget {
                             hasButton: true,
                             btnTitle: 'Lihat Semua',
                             onPress: () {
-                              Get.to(ListRankingPage());
+                              Get.to(() => ListRankingPage())?.then((value) {
+                                setState(() {});
+                              });
                             },
                           ),
                           SizedBox(
                             height: 18,
                           ),
-                          RankingCard(
-                            saldo: 1000,
-                            username: 'mamank',
-                            index: 1,
+                          BlocBuilder<RankingCubit, RankingState>(
+                            builder: (context, state) {
+                              if (state is RankingHomeLoaded) {
+                                return Column(
+                                  children: state.rankings!
+                                      .map((e) => RankingCard(
+                                            saldo: e.saldo,
+                                            username: e.name,
+                                            index: (state.rankings!.indexOf(e) +
+                                                1),
+                                          ))
+                                      .toList(),
+                                );
+                              } else {
+                                return SizedBox();
+                              }
+                            },
                           ),
                           SizedBox(
                             height: 100,

@@ -1,22 +1,30 @@
 part of 'pages.dart';
 
 class PenukaranPage extends StatefulWidget {
-  const PenukaranPage({Key? key}) : super(key: key);
+  final int? saldo;
+
+  const PenukaranPage({Key? key, this.saldo}) : super(key: key);
 
   @override
   State<PenukaranPage> createState() => _PenukaranPageState();
 }
 
 class _PenukaranPageState extends State<PenukaranPage> {
-  TextEditingController _tukarController = TextEditingController();
+  TextEditingController _tukarController = TextEditingController(text: '0');
 
   void handlePenukaran() {
-    context.loaderOverlay.show();
+    if (int.parse(_tukarController.text) > widget.saldo! ||
+        int.parse(_tukarController.text) == 0) {
+      snackbarError(
+          title: "Terjadi Kesalahan", message: "Saldo Tidak Mencukupi");
+    } else {
+      context.loaderOverlay.show();
 
-    Future.delayed(Duration(milliseconds: 1000), () {
-      context.loaderOverlay.hide();
-      Get.back();
-    });
+      Future.delayed(Duration(milliseconds: 1000), () {
+        context.loaderOverlay.hide();
+        Get.back();
+      });
+    }
   }
 
   @override
@@ -50,7 +58,7 @@ class _PenukaranPageState extends State<PenukaranPage> {
                             style: normalTextStyle,
                           ),
                           Text(
-                            'Rp. 800',
+                            'Rp. ${widget.saldo}',
                             style: normalTextStyle,
                           ),
                         ],

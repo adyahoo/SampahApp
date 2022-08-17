@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:sampah/data/cubits/cubit.dart';
-import 'package:sampah/data/cubits/edukasi_cubit.dart';
+import 'package:sampah/data/cubit/cubit.dart';
+import 'package:sampah/data/cubit/edukasi_cubit.dart';
 import 'package:sampah/data/models/models.dart';
 import 'package:sampah/data/services/services.dart';
 import 'package:sampah/shared/shared.dart';
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => UserCubit()),
         BlocProvider(create: (_) => CommonCubit()),
         BlocProvider(create: (_) => EdukasiCubit()),
+        BlocProvider(create: (_) => RankingCubit()),
       ],
       child: GlobalLoaderOverlay(
         useDefaultLoading: false,

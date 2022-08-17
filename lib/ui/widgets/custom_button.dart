@@ -20,7 +20,7 @@ class _CustomButtonState extends State<CustomButton> {
       margin: EdgeInsets.only(bottom: 16),
       alignment: Alignment.center,
       child: ElevatedButton(
-        onPressed: (widget.onPress != null) ? () => widget.onPress!() : () {},
+        onPressed: (widget.onPress != null) ? () => widget.onPress!() : null,
         child: Text(
           widget.title,
           style:

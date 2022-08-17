@@ -17,11 +17,11 @@ class UserModel extends Equatable {
   @HiveField(6)
   final String? fotoProfil;
   @HiveField(7)
-  final int? idSaldo;
+  final int? saldo;
   @HiveField(8)
   final int? idBanjar;
   @HiveField(9)
-  final String? kodeNasabah;
+  final String? nomorNasabah;
   final BanjarModel? banjar;
   static String? token;
 
@@ -33,10 +33,10 @@ class UserModel extends Equatable {
       this.alamat,
       this.jenisKelamin,
       this.fotoProfil,
-      this.idSaldo,
+      this.saldo,
       this.idBanjar,
       this.banjar,
-      this.kodeNasabah});
+      this.nomorNasabah});
 
   factory UserModel.fromJson(Map<String, dynamic> data) => UserModel(
       id: data['id'],
@@ -46,9 +46,9 @@ class UserModel extends Equatable {
       alamat: data['alamat'],
       jenisKelamin: data['jenis_kelamin'],
       fotoProfil: data['foto_profil'],
-      idSaldo: data['id_saldo'],
+      saldo: data['saldo'],
       idBanjar: data['banjar_id'],
-      kodeNasabah: data['kode_nasabah'],
+      nomorNasabah: data['nomor_nasabah'],
       banjar: BanjarModel.fromJson(data['banjar']));
 
   @override
@@ -60,8 +60,8 @@ class UserModel extends Equatable {
         alamat,
         jenisKelamin,
         fotoProfil,
-        idSaldo,
+        saldo,
         idBanjar,
-        kodeNasabah
+        nomorNasabah
       ];
 }

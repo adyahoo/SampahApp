@@ -12,10 +12,13 @@ part 'custom_client.dart';
 part 'user_services.dart';
 part 'edukasi_services.dart';
 part 'common_services.dart';
+part 'ranking_services.dart';
 
 String TOKEN = 'TOKEN';
 String USER_BOX = 'USER_BOX';
-String baseUrl = 'http://10.0.2.2:8000/api/user';
+// String baseUrl = 'https://sinyampah.ngaeapp.com/api/user';
+String baseUrl = 'https://admin.gunabangsahmmunud.com/api/user';
+String baseUrlImg = 'https://admin.gunabangsahmmunud.com';
 
 Future<void> setUserPref({String? token}) async {
   SharedPreferences pref = await SharedPreferences.getInstance();

@@ -6,7 +6,7 @@ class ListNewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.watch<EdukasiCubit>().getAllEdukasi();
-    
+
     return Scaffold(
       appBar: CustomAppbar(
         title: 'Berita',
@@ -15,6 +15,7 @@ class ListNewsPage extends StatelessWidget {
       body: SafeArea(
         child: Container(
             width: double.infinity,
+            color: Colors.white,
             padding: EdgeInsets.symmetric(horizontal: 16),
             margin: EdgeInsets.only(bottom: 12),
             child: BlocBuilder<EdukasiCubit, EdukasiState>(
@@ -27,7 +28,7 @@ class ListNewsPage extends StatelessWidget {
                         return NewsCard(
                             edukasi: state.edukasis![index], isVertical: true);
                       })
-                  : SizedBox()),
+                  : LoadingIndicator()),
             )),
       ),
     );

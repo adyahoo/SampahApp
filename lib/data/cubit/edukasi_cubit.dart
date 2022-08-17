@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sampah/data/cubits/common_cubit.dart';
+import 'package:sampah/data/cubit/common_cubit.dart';
 import 'package:sampah/data/models/models.dart';
 import 'package:sampah/data/services/services.dart';
 

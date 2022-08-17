@@ -24,9 +24,9 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       alamat: fields[4] as String?,
       jenisKelamin: fields[5] as String?,
       fotoProfil: fields[6] as String?,
-      idSaldo: fields[7] as int?,
+      saldo: fields[7] as int?,
       idBanjar: fields[8] as int?,
-      kodeNasabah: fields[9] as String?,
+      nomorNasabah: fields[9] as String?,
     );
   }
 
@@ -49,11 +49,11 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       ..writeByte(6)
       ..write(obj.fotoProfil)
       ..writeByte(7)
-      ..write(obj.idSaldo)
+      ..write(obj.saldo)
       ..writeByte(8)
       ..write(obj.idBanjar)
       ..writeByte(9)
-      ..write(obj.kodeNasabah);
+      ..write(obj.nomorNasabah);
   }
 
   @override

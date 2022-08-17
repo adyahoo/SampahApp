@@ -27,7 +27,10 @@ class NewsCard extends StatelessWidget {
                   height: 126,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/chaeyoung.jpg'),
+                          // image: AssetImage('assets/images/chaeyoung.jpg'),
+                          image: NetworkImage(baseUrlImg + edukasi.thumbnail!),
+                          // image: NetworkImage(
+                          //     'https://kpopping.com/documents/2e/5/220802-TWICE-Chaeyoung-Chanel-Pop-Up-Store-Event-documents-1.jpeg?v=0eaaa'),
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(5)),
                 ),
@@ -81,7 +84,8 @@ class NewsCard extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     image: DecorationImage(
-                        image: AssetImage('assets/images/chaeyoung.jpg'),
+                        image: NetworkImage(baseUrlImg + edukasi.thumbnail!),
+                        // image: AssetImage('assets/images/chaeyoung.jpg'),
                         fit: BoxFit.contain)),
               ),
               Container(

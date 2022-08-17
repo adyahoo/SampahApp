@@ -15,40 +15,46 @@ class DetailNewsPage extends StatelessWidget {
           hasBack: true,
         ),
         body: SafeArea(
-            child: BlocBuilder<EdukasiCubit, EdukasiState>(
-          builder: ((context, state) => (state is EdukasiLoaded)
-              ? Container(
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      //section thumbnail
-                      Container(
-                        width: double.infinity,
-                        height: 250,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image:
-                                    AssetImage('assets/images/chaeyoung.jpg'),
-                                fit: BoxFit.cover)),
-                      ),
-                      //section judul
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 12),
-                        child: Text(
-                          state.edukasi!.judul!,
-                          style: primaryBoldTextStyle.copyWith(fontSize: 18),
+            child: SingleChildScrollView(
+          child: BlocBuilder<EdukasiCubit, EdukasiState>(
+            builder: ((context, state) => (state is EdukasiLoaded)
+                ? Container(
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        //section thumbnail
+                        Container(
+                          width: double.infinity,
+                          height: 250,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      baseUrlImg + state.edukasi!.thumbnail!),
+                                  fit: BoxFit.cover)),
                         ),
-                      ),
-                      //section content
-                      Padding(
+                        //section judul
+                        Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 12),
-                          child: Text(state.edukasi!.konten!)),
-                    ],
-                  ),
-                )
-              : LoadingIndicator()),
+                          child: Text(
+                            state.edukasi!.judul!,
+                            style: primaryBoldTextStyle.copyWith(fontSize: 18),
+                          ),
+                        ),
+                        //section content
+                        Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 12),
+                            child: Html(
+                              data: state.edukasi?.konten,
+                            )
+                            // Text(state.edukasi!.konten!)
+                            ),
+                      ],
+                    ),
+                  )
+                : LoadingIndicator()),
+          ),
         )));
   }
 }
