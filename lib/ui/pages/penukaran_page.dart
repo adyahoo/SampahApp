@@ -34,7 +34,7 @@ class _PenukaranPageState extends State<PenukaranPage> {
         context.loaderOverlay.hide();
         snackbarError(
             title: 'Terjadi Kesalahan',
-            message: (state as StoreSaldoFailed).message);
+            message: (state as PenukaranLoadedFailed).message);
       }
     }
   }

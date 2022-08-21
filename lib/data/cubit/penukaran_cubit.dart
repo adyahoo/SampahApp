@@ -15,7 +15,18 @@ class PenukaranCubit extends Cubit<PenukaranState> {
     if (result.status == true) {
       emit(StoreSaldoSuccess(result.message));
     } else {
-      emit(StoreSaldoFailed(result.message));
+      emit(PenukaranLoadedFailed(result.message));
+    }
+  }
+
+  Future<void> getPenukaran() async {
+    ApiReturnValue<List<HistoryPenukaranModel>> result =
+        await PenukaranServices.getPenukaran();
+
+    if (result.status == true) {
+      emit(PenukaranLoaded(result.value));
+    } else {
+      emit(PenukaranLoadedFailed(result.message));
     }
   }
 }

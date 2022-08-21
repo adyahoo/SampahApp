@@ -37,3 +37,4 @@ part 'detail_news_page.dart';
 part 'history_penukaran_page.dart';
 part 'list_pemasukan_page.dart';
 part 'list_penukaran_page.dart';
+part 'change_password_page.dart';

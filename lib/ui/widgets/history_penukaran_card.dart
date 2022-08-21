@@ -1,28 +1,31 @@
 part of 'widgets.dart';
 
 class HistoryPenukaranCard extends StatelessWidget {
-  final String? date;
-  final List<SampahModel>? sampahs;
+  final HistoryPenukaranModel penukaran;
 
-  const HistoryPenukaranCard({Key? key, this.date, this.sampahs})
+  const HistoryPenukaranCard({Key? key, required this.penukaran})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    DateTime stringToDate =
+        new DateFormat("yyyy-MM-dd").parse(penukaran.tglPenukaran);
+    String formatedDate = new DateFormat('yMMMMEEEEd').format(stringToDate);
     return Container(
       width: double.infinity,
+      margin: EdgeInsets.only(bottom: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            date!,
+            formatedDate,
             style: normalBoldTextStyle,
           ),
           SizedBox(
             height: 12,
           ),
           Column(
-            children: sampahs!
+            children: penukaran.penukarans!
                 .map(
                   (e) => Container(
                     width: double.infinity,
@@ -35,18 +38,18 @@ class HistoryPenukaranCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          e.nama!,
-                          style: primaryBoldTextStyle.copyWith(fontSize: 18),
+                          'Status Transaksi : ${e.status! == 'menunggu_konfirmasi' ? 'Menunggu Konfirmasi' : e.status! == 'terkonfirmasi' ? 'Valid' : 'Ditolak'}',
+                          style: primaryBoldTextStyle.copyWith(fontSize: 16),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Berat ${e.berat} kg',
+                              'Tanggal : ${e.tglPenukaran}',
                               style: primaryTextStyle,
                             ),
                             Text(
-                              'Rp. ${e.harga}/kg',
+                              'Rp. ${e.jumlahPenukaran}',
                               style: primaryTextStyle,
                             ),
                           ],

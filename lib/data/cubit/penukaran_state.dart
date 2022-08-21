@@ -18,6 +18,24 @@ class StoreSaldoSuccess extends PenukaranState {
   List<Object?> get props => [message];
 }
 
+class PenukaranLoaded extends PenukaranState {
+  final List<HistoryPenukaranModel>? penukarans;
+
+  PenukaranLoaded(this.penukarans);
+
+  @override
+  List<Object?> get props => [penukarans];
+}
+
+class PenukaranLoadedFailed extends PenukaranState {
+  final String? message;
+
+  PenukaranLoadedFailed(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
 class StoreSaldoFailed extends PenukaranState {
   final String? message;
 

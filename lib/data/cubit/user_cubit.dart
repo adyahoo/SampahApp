@@ -62,15 +62,29 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<void> editProfile(File image, String name, String bornDate,
-      String phone, String gender, String address) async {
+  Future<void> editProfile(
+      String name, String bornDate, String phone, String gender, String address,
+      {File? image}) async {
     ApiReturnValue<UserModel> result = await UserService.updateProfile(
-        image, name, bornDate, phone, gender, address);
+        name, bornDate, phone, gender, address,
+        image: image);
 
     if (result.status == true) {
       emit(UserLoaded(result.value));
     } else {
       emit(UserLoadedFailed(result.message));
+    }
+  }
+
+  Future<void> changePassword(
+      String oldPass, String newPass, String confNewPass) async {
+    ApiReturnValue<String> result =
+        await UserService.changePassword(oldPass, newPass, confNewPass);
+
+    if (result.status == true) {
+      emit(ChangePasswordSuccess(result.message));
+    } else {
+      emit(ChangePasswordFailed(result.message));
     }
   }
 }

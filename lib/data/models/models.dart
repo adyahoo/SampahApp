@@ -12,5 +12,9 @@ part 'edukasi_model.dart';
 part 'ranking_model.dart';
 part 'banjar_model.dart';
 part 'penukaran_model.dart';
+part 'daftar_transaksi_model.dart';
+part 'daftar_penukaran_model.dart';
+part 'transaksi_model.dart';
+part 'history_penukaran_model.dart';
 
 part 'models.g.dart';

@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<CommonCubit>().getBanjar();
+    context.read<CommonCubit>().getBanjar();
 
     return Scaffold(
       body: SafeArea(

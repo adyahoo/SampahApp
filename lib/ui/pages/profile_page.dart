@@ -34,7 +34,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   title: 'Iya',
                   isPrimary: false,
                   onPress: () async {
-                    // Get.back();
                     context.loaderOverlay.show();
 
                     await context.read<UserCubit>().logout();
@@ -43,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     if (state is UserLoggedOut) {
                       context.loaderOverlay.hide();
                       snackbarSuccess(title: "Logout Berhasil");
-                      Get.off(() => LoginPage());
+                      Get.offAll(() => LoginPage());
                     } else {
                       context.loaderOverlay.hide();
                       snackbarError(
@@ -64,10 +63,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     title: 'Profile',
                     hasBack: false,
                     hasIcon: true,
-                    onIconPress: () {
+                    onIconPress: () async {
                       Get.to(() => EditProfilePage(
                             user: state.user,
-                          ));
+                          ))?.then((value) {
+                        setState(() {});
+                      });
                     }),
                 body: ListView(
                   children: [
@@ -87,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                         image: (state.user!.fotoProfil != null)
-                                            ? NetworkImage(
+                                            ? NetworkImage(baseUrlImg +
                                                 state.user!.fotoProfil!)
                                             : AssetImage(
                                                 'assets/images/profile.png',
@@ -232,6 +233,30 @@ class _ProfilePageState extends State<ProfilePage> {
                                     SectionTitle(title: 'Setting'),
                                     SizedBox(
                                       height: 24,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.to(() => ChangePasswordPage())
+                                            ?.then((value) {
+                                          setState(() {});
+                                        });
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                              width: 70,
+                                              child: Icon(
+                                                Icons.change_circle_outlined,
+                                                size: 32,
+                                                color: primaryColor,
+                                              )),
+                                          Text('Ganti Password',
+                                              style: normalBoldTextStyle)
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 32,
                                     ),
                                     GestureDetector(
                                       onTap: () => handleLogout(),

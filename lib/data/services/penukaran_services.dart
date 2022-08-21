@@ -26,4 +26,28 @@ class PenukaranServices {
     return ApiReturnValue(
         status: true, value: penukaran, message: data['message']);
   }
+
+  static Future<ApiReturnValue<List<HistoryPenukaranModel>>> getPenukaran(
+      {http.Client? client}) async {
+    client = http.Client();
+    String url = baseUrl + '/penukaran-saldo';
+
+    String? token = await getUserToken();
+
+    var response = await client
+        .get(Uri.parse(url), headers: {"Authorization": "Bearer $token"});
+
+    var data = jsonDecode(response.body);
+
+    if (response.statusCode != 200) {
+      return ApiReturnValue(status: false, message: data['message']);
+    }
+
+    List<HistoryPenukaranModel> penukarans = (data['penukaran'] as Iterable)
+        .map((e) => HistoryPenukaranModel.fromJson(e))
+        .toList();
+
+    return ApiReturnValue(
+        status: true, value: penukarans, message: data['message']);
+  }
 }

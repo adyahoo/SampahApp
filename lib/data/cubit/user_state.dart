@@ -48,3 +48,21 @@ class UserLoadedFailed extends UserState {
   @override
   List<Object?> get props => [message];
 }
+
+class ChangePasswordSuccess extends UserState {
+  final String? message;
+
+  ChangePasswordSuccess(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class ChangePasswordFailed extends UserState {
+  final String? message;
+
+  ChangePasswordFailed(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}

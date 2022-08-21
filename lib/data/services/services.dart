@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter_html/flutter_html.dart';
 import 'package:hive/hive.dart';
 import 'package:sampah/data/models/models.dart';
 import 'package:http/http.dart' as http;
@@ -14,6 +15,7 @@ part 'edukasi_services.dart';
 part 'common_services.dart';
 part 'ranking_services.dart';
 part 'penukaran_services.dart';
+part 'transaksi_service.dart';
 
 String TOKEN = 'TOKEN';
 String USER_BOX = 'USER_BOX';
@@ -52,5 +54,5 @@ void deleteLocalUser() async {
   await Hive.openBox(USER_BOX);
   var userBox = Hive.box(USER_BOX);
   userBox.clear();
-  userBox.close();
+  // userBox.close();
 }

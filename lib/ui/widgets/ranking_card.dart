@@ -43,9 +43,14 @@ class RankingCard extends StatelessWidget {
                       color: primaryColor,
                       margin: EdgeInsets.symmetric(horizontal: 15),
                     ),
-                    Text(
-                      username!,
-                      style: primaryBoldTextStyle.copyWith(fontSize: 18),
+                    Container(
+                      width: 200,
+                      child: Text(
+                        username!,
+                        style: primaryBoldTextStyle.copyWith(fontSize: 18),
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ],
                 ),

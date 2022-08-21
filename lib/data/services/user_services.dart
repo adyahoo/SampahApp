@@ -133,9 +133,9 @@ class UserService {
     return ApiReturnValue(value: user, status: data['status']);
   }
 
-  static Future<ApiReturnValue<UserModel>> updateProfile(File image,
+  static Future<ApiReturnValue<UserModel>> updateProfile(
       String name, String bornDate, String phone, String gender, String address,
-      {http.Client? client}) async {
+      {http.Client? client, File? image}) async {
     client = http.Client();
 
     String url = baseUrl + '/profile/update';
@@ -151,37 +151,44 @@ class UserService {
 
     Map<String, String> headers = {
       "Authorization": "Bearer $token",
-      "Content-Type": "multipart/form-data",
+      "Content-Type": "application/json",
       "Accept": "application/json"
     };
 
-    // var multiPartFile = await http.MultipartFile.fromString('foto', image.path,
-    //     contentType: MediaType('image', 'png'));
+    var request = await http.MultipartRequest('POST', Uri.parse(url));
+    request.headers.addAll(headers);
+    request.fields.addAll(params);
 
-    // var request = await http.MultipartRequest('POST', Uri.parse(url));
-    // request.headers.addAll(headers);
-    // request.fields.addAll(params);
-    // request.files.add(multiPartFile);
+    if (image != null) {
+      var multiPartFile = await http.MultipartFile.fromPath(
+          'foto', image.path,
+          contentType: MediaType('image', 'png'), filename: 'gambar asjah');
+      // var multiPartFile = await http.MultipartFile.fromString(
+      //     'foto', image.path,
+      //     contentType: MediaType('image', 'png'), filename: 'gambar asjah');
+      request.files.add(multiPartFile);
+    }
 
-    // var response = await request.send();
+    var response = await request.send();
 
-    // String responseBody = await response.stream.bytesToString();
+    String responseBody = await response.stream.bytesToString();
 
-    var response = await client.post(Uri.parse(url), headers: {
-      "Authorization": "Bearer $token",
-      // "Content-Type": "multipart/form-data",
-      "Accept": "application/json"
-    }, body: {
-      'nama': name,
-      'tgl_lahir': bornDate,
-      'telepon': phone,
-      'jenis_kelamin': gender,
-      'alamat': address,
-      'foto': base64Encode(image.readAsBytesSync())
-    });
+    // var response = await client.post(Uri.parse(url),
+    //     headers: {
+    //       "Authorization": "Bearer $token",
+    //       "Content-Type": "application/json",
+    //       "Accept": "application/json"
+    //     },
+    //     body: jsonEncode({
+    //       'nama': name,
+    //       'tgl_lahir': bornDate,
+    //       'telepon': phone,
+    //       'jenis_kelamin': gender,
+    //       'alamat': address,
+    //       'foto': image != null ? base64Encode(image.readAsBytesSync()) : null
+    //     }));
 
-    var data = jsonDecode(response.body);
-    log(response.body);
+    var data = jsonDecode(responseBody);
 
     if (response.statusCode != 200) {
       return ApiReturnValue(
@@ -193,5 +200,34 @@ class UserService {
     setLocalUser(user);
 
     return ApiReturnValue(value: user, status: true);
+  }
+
+  static Future<ApiReturnValue<String>> changePassword(
+      String oldPass, String newPass, String confNewPass,
+      {http.Client? client}) async {
+    client = http.Client();
+
+    String url = baseUrl + '/update-password';
+    String? token = await getUserToken();
+
+    var response = await client.post(Uri.parse(url),
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: jsonEncode({
+          "password_lama": oldPass,
+          "password_baru": newPass,
+          "password_baru_confirmation": confNewPass
+        }));
+
+    var data = jsonDecode(response.body);
+
+    if (response.statusCode != 200 || data['success'] == false) {
+      return ApiReturnValue(status: false, message: data['message']);
+    }
+
+    return ApiReturnValue(status: true, message: data['message']);
   }
 }

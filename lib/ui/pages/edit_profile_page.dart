@@ -10,13 +10,14 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  XFile? _imagePicked = null;
+  PickedFile? _imagePicked = null;
   DateTime? _selectedDate;
   TextEditingController _nameController = TextEditingController();
   TextEditingController _addressController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
   String? _selectedGender;
   final ImagePicker _picker = ImagePicker();
+  bool isFirstTime = true;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -38,13 +39,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     String bornDate = DateFormat('yyyy-MM-dd').format(_selectedDate);
 
-    await context.read<UserCubit>().editProfile(
-        File(_imagePicked!.path),
-        _nameController.text,
-        bornDate,
-        _phoneController.text,
-        _selectedGender!,
-        _addressController.text);
+    await context.read<UserCubit>().editProfile(_nameController.text, bornDate,
+        _phoneController.text, _selectedGender!, _addressController.text,
+        image: _imagePicked != null ? File(_imagePicked!.path) : null);
     var state = context.read<UserCubit>().state;
 
     if (state is UserLoaded) {
@@ -61,6 +58,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    UserState state = context.read<UserCubit>().state;
+    if (state is UserLoaded && isFirstTime) {
+      _nameController.text = state.user!.nama!;
+      _addressController.text = state.user!.alamat!;
+      _phoneController.text = state.user!.telepon!;
+      _selectedDate = DateTime.parse(state.user!.tglLahir!);
+      _selectedGender = state.user!.jenisKelamin;
+      setState(() {
+        isFirstTime = false;
+      });
+    }
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppbar(
@@ -75,8 +83,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 //image profile
                 GestureDetector(
                   onTap: () async {
-                    _imagePicked =
-                        await _picker.pickImage(source: ImageSource.gallery);
+                    _imagePicked = await ImagePicker()
+                        .getImage(source: ImageSource.gallery);
                     setState(() {});
                   },
                   child: (_imagePicked != null)
@@ -97,9 +105,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                  image: AssetImage(
-                                    'assets/images/profile.png',
-                                  ),
+                                  image: (widget.user?.fotoProfil != null)
+                                      ? NetworkImage(
+                                          baseUrlImg + widget.user!.fotoProfil!)
+                                      : AssetImage(
+                                          'assets/images/profile.png',
+                                        ) as ImageProvider,
                                   fit: BoxFit.cover)),
                         ),
                 ),
@@ -162,7 +173,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 SizedBox(height: 32),
                 CustomButton(
                   title: 'Simpan',
-                  onPress: () => handleEditProfile(),
+                  onPress: () {
+                    if (_nameController.text.isEmpty ||
+                        _addressController.text.isEmpty ||
+                        _phoneController.text.isEmpty ||
+                        _selectedDate == null ||
+                        _selectedGender == null) {
+                      snackbarError(
+                          title: 'Gagal Mengubah Profile',
+                          message: 'Mohon Lengkapi Seluruh Data');
+                    } else {
+                      handleEditProfile();
+                    }
+                  },
                 ),
                 CustomButton(
                   title: 'Batal',

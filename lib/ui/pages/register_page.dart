@@ -51,9 +51,9 @@ class _RegisterPageState extends State<RegisterPage> {
       UserState state = context.read<UserCubit>().state;
 
       if (state is UserRegistered) {
-        Get.back();
         context.loaderOverlay.hide();
         snackbarSuccess(title: '${state.message}');
+        Get.offAll(() => LoginPage());
       } else {
         context.loaderOverlay.hide();
         snackbarError(
@@ -149,7 +149,21 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 CustomButton(
                   title: 'Sign Up',
-                  onPress: () => handleRegister(),
+                  onPress: () {
+                    if (_nameController.text.isEmpty ||
+                        _phoneController.text.isEmpty ||
+                        _selectedDate == null ||
+                        _addressController.text.isEmpty ||
+                        _selectedBanjar == null ||
+                        _passwordController.text.isEmpty ||
+                        _confPasswordController.text.isEmpty) {
+                      snackbarError(
+                          title: 'Gagal Register',
+                          message: 'Mohon Lengkapi Seluruh Data');
+                    } else {
+                      handleRegister();
+                    }
+                  },
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
