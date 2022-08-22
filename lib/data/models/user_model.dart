@@ -51,6 +51,18 @@ class UserModel extends Equatable {
       nomorNasabah: data['nomor_nasabah'],
       banjar: BanjarModel.fromJson(data['banjar']));
 
+  factory UserModel.commentJson(Map<String, dynamic> data) => UserModel(
+      id: data['id'],
+      nama: data['nama'],
+      fotoProfil: data['foto_profil'],
+      idBanjar: data['banjar_id'],
+      telepon: data['telepon'],
+      tglLahir: data['tgl_lahir'],
+      nomorNasabah: data['nomor_nasabah'],
+      jenisKelamin: data['jenis_kelamin'],
+      alamat: data['alamat'],
+      saldo: data['saldo']);
+
   @override
   List<Object?> get props => [
         id,

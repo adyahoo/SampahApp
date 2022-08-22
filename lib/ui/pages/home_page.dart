@@ -50,7 +50,12 @@ class _HomePageState extends State<HomePage> {
                                           ],
                                         ),
                                         IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Get.to(() => ListKomentarPage())
+                                                ?.then((value) {
+                                              setState(() {});
+                                            });
+                                          },
                                           icon: Icon(Icons.chat_outlined),
                                           color: primaryColor,
                                           iconSize: 24,

@@ -3,3 +3,4 @@ export 'common_cubit.dart';
 export 'ranking_cubit.dart';
 export 'penukaran_cubit.dart';
 export 'transaksi_cubit.dart';
+export 'komentar_cubit.dart';

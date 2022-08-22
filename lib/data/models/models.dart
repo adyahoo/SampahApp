@@ -16,5 +16,7 @@ part 'daftar_transaksi_model.dart';
 part 'daftar_penukaran_model.dart';
 part 'transaksi_model.dart';
 part 'history_penukaran_model.dart';
+part 'admin_model.dart';
+part 'komentar_model.dart';
 
 part 'models.g.dart';

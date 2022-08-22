@@ -15,6 +15,7 @@ part 'edukasi_services.dart';
 part 'common_services.dart';
 part 'ranking_services.dart';
 part 'penukaran_services.dart';
+part 'komentar_services.dart';
 part 'transaksi_service.dart';
 
 String TOKEN = 'TOKEN';

@@ -28,3 +28,5 @@ part 'daftar_sampah_card.dart';
 part 'custom_date_picker.dart';
 part 'custom_dropdown.dart';
 part 'history_penukaran_card.dart';
+part 'custom_fab.dart';
+part 'komentar_card.dart';
