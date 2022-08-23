@@ -49,7 +49,7 @@ class HistoryPenukaranCard extends StatelessWidget {
                               style: primaryTextStyle,
                             ),
                             Text(
-                              'Rp. ${e.jumlahPenukaran}',
+                              '${convertCurrency(e.jumlahPenukaran.toString())}',
                               style: primaryTextStyle,
                             ),
                           ],

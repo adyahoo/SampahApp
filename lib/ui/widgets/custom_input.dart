@@ -7,6 +7,7 @@ class CustomInput extends StatefulWidget {
   final String label;
   final String hintText;
   final TextInputType textInputType;
+  final int maxLine;
 
   const CustomInput(
       {Key? key,
@@ -15,6 +16,7 @@ class CustomInput extends StatefulWidget {
       this.hintText = '',
       this.label = '',
       this.isPassword = false,
+      this.maxLine = 1,
       this.hasLabel = false})
       : super(key: key);
 
@@ -51,6 +53,7 @@ class _CustomInputState extends State<CustomInput> {
             controller: widget.textEditingController,
             obscureText: (widget.isPassword) ? !_passwordVisible : false,
             keyboardType: widget.textInputType,
+            maxLines: widget.maxLine,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintStyle: secondaryTextStyle,

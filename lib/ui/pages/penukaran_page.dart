@@ -10,13 +10,19 @@ class PenukaranPage extends StatefulWidget {
 }
 
 class _PenukaranPageState extends State<PenukaranPage> {
-  TextEditingController _tukarController = TextEditingController(text: '0');
+  TextEditingController _tukarController = TextEditingController();
 
   void handlePenukaran() async {
     if (int.parse(_tukarController.text) > widget.saldo! ||
         int.parse(_tukarController.text) == 0) {
       snackbarError(
           title: "Terjadi Kesalahan", message: "Saldo Tidak Mencukupi");
+    } else if (int.parse(_tukarController.text) < 5000) {
+      snackbarError(
+          title: "Terjadi Kesalahan", message: "Minimal Penukaran Rp.5000");
+    } else if (int.parse(_tukarController.text) % 1000 != 0) {
+      snackbarError(
+          title: "Terjadi Kesalahan", message: "Harus Kelipatan Rp.1000");
     } else {
       context.loaderOverlay.show();
 
@@ -70,7 +76,7 @@ class _PenukaranPageState extends State<PenukaranPage> {
                             style: normalTextStyle,
                           ),
                           Text(
-                            'Rp. ${widget.saldo}',
+                            '${convertCurrency(widget.saldo.toString())}',
                             style: normalTextStyle,
                           ),
                         ],

@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                                               style: normalTextStyle.copyWith(
                                                   fontSize: 18)),
                                           Text(
-                                              'Rp. ${(state as UserLoaded).user?.saldo}',
+                                              '${convertCurrency((state as UserLoaded).user?.saldo.toString())}',
                                               style: normalBoldTextStyle
                                                   .copyWith(fontSize: 38)),
                                           SizedBox(height: 28),

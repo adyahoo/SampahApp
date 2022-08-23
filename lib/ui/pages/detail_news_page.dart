@@ -38,7 +38,7 @@ class DetailNewsPage extends StatelessWidget {
                               horizontal: 16, vertical: 12),
                           child: Text(
                             state.edukasi!.judul!,
-                            style: primaryBoldTextStyle.copyWith(fontSize: 18),
+                            style: primaryBoldTextStyle.copyWith(fontSize: 22),
                           ),
                         ),
                         //section content
@@ -47,6 +47,11 @@ class DetailNewsPage extends StatelessWidget {
                                 horizontal: 16, vertical: 12),
                             child: Html(
                               data: state.edukasi?.konten,
+                              style: {
+                                "p": Style(
+                                  fontSize: FontSize(18),
+                                )
+                              },
                             )
                             // Text(state.edukasi!.konten!)
                             ),

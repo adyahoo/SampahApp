@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter_html/flutter_html.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:sampah/data/models/models.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -56,4 +57,8 @@ void deleteLocalUser() async {
   var userBox = Hive.box(USER_BOX);
   userBox.clear();
   // userBox.close();
+}
+
+String convertCurrency(String? money) {
+  return new NumberFormat.currency(locale: 'id',symbol: 'Rp. ').format(int.parse(money!));
 }

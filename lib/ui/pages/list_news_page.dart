@@ -26,7 +26,10 @@ class ListNewsPage extends StatelessWidget {
                       itemCount: state.edukasis!.length,
                       itemBuilder: (BuildContext context, int index) {
                         return NewsCard(
-                            edukasi: state.edukasis![index], isVertical: true);
+                            onPress: () => Get.to(() =>
+                                DetailNewsPage(id: state.edukasis![index].id!)),
+                            edukasi: state.edukasis![index],
+                            isVertical: true);
                       })
                   : LoadingIndicator()),
             )),

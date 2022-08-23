@@ -53,9 +53,13 @@ class _KomentarCardState extends State<KomentarCard> {
                     SizedBox(
                       width: 8,
                     ),
-                    Text(
-                      widget.comment!.user!.nama!,
-                      style: normalBoldTextStyle,
+                    Container(
+                      width: 200,
+                      child: Text(
+                        widget.comment!.user!.nama!,
+                        style: normalBoldTextStyle,
+                        softWrap: true,
+                      ),
                     )
                   ],
                 ),
@@ -70,10 +74,12 @@ class _KomentarCardState extends State<KomentarCard> {
             ),
             Container(
               width: double.infinity,
-              child: Text(widget.comment!.text!,
-                  textAlign: TextAlign.left,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis),
+              child: Text(
+                widget.comment!.text!,
+                textAlign: TextAlign.left,
+                // maxLines: 3,
+                // overflow: TextOverflow.ellipsis
+              ),
             ),
             SizedBox(
               height: 12,
@@ -125,9 +131,13 @@ class ReplyCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  comment!.admin!.nama!,
-                  style: normalBoldTextStyle.copyWith(fontSize: 12),
+                Container(
+                  width: 200,
+                  child: Text(
+                    comment!.admin!.nama!,
+                    style: normalBoldTextStyle.copyWith(fontSize: 12),
+                    softWrap: true,
+                  ),
                 ),
                 Text(
                   convertDate(comment!.replyDate!),

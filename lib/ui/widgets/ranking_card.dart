@@ -5,13 +5,14 @@ class RankingCard extends StatelessWidget {
   final String? saldo;
   final int? index;
 
-  const RankingCard({Key? key, this.saldo, this.username, this.index}) : super(key: key);
+  const RankingCard({Key? key, this.saldo, this.username, this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 65,
+      // height: 65,
       child: Card(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -44,20 +45,24 @@ class RankingCard extends StatelessWidget {
                       margin: EdgeInsets.symmetric(horizontal: 15),
                     ),
                     Container(
-                      width: 200,
+                      width: 150,
                       child: Text(
                         username!,
-                        style: primaryBoldTextStyle.copyWith(fontSize: 18),
+                        style: primaryBoldTextStyle,
                         softWrap: true,
-                        overflow: TextOverflow.ellipsis,
+                        // overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
                 ),
               ),
-              Text(
-                'Rp. $saldo',
-                style: primaryTextStyle,
+              Container(
+                width: 100,
+                child: Text(
+                  '${convertCurrency(saldo!)}',
+                  style: primaryTextStyle,
+                  softWrap: true,
+                ),
               ),
             ],
           ),

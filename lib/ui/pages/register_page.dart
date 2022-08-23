@@ -160,6 +160,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       snackbarError(
                           title: 'Gagal Register',
                           message: 'Mohon Lengkapi Seluruh Data');
+                    } else if (_nameController.text
+                        .contains(new RegExp(r'[0-9]'))) {
+                      snackbarError(
+                          title: 'Gagal Register',
+                          message: 'Nama Tidak Boleh Mengandung Angka');
                     } else {
                       handleRegister();
                     }

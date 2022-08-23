@@ -3,7 +3,7 @@ part of 'models.dart';
 class DaftarTransaksiModel extends Equatable {
   final int? id;
   final UserModel? nasabah;
-  final int? totalBerat;
+  final double? totalBerat;
   final int? totalHarga;
   final String? tglTransaksi;
   final String? status;
@@ -22,7 +22,7 @@ class DaftarTransaksiModel extends Equatable {
       DaftarTransaksiModel(
           id: data['id'],
           nasabah: UserModel.fromJson(data['nasabah']),
-          totalBerat: data['total_berat'],
+          totalBerat: data['total_berat'].toDouble(),
           totalHarga: data['total_harga'],
           tglTransaksi: data['tanggal_transaksi'],
           status: data['status'],

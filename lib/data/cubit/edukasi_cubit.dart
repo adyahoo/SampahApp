@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sampah/data/cubit/common_cubit.dart';
@@ -32,13 +34,16 @@ class EdukasiCubit extends Cubit<EdukasiState> {
   }
 
   Future<void> getDetailEdukasi(int id) async {
-    ApiReturnValue<EdukasiModel> result =
-        await EdukasiService.getDetailEdukasi(id);
-
-    if (result.status == true) {
-      emit(EdukasiLoaded(edukasi: result.value));
-    } else {
-      emit(LoadDataFailed(result.message));
+    try {
+      ApiReturnValue<EdukasiModel> result =
+          await EdukasiService.getDetailEdukasi(id);
+      if (result.status == true) {
+        emit(EdukasiLoaded(edukasi: result.value));
+      } else {
+        emit(LoadDataFailed(result.message));
+      }
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

@@ -42,12 +42,9 @@ class _ListKomentarPageState extends State<ListKomentarPage> {
     context.read<KomentarCubit>().getComments();
 
     return Scaffold(
-        appBar: CustomAppbar(title: 'List Komentar'),
+        appBar: CustomAppbar(title: 'List Pesan'),
         floatingActionButton: CustomFab(
           onPress: () {
-            // Get.to(() => StoreKomentarPage())?.then((value) {
-            //   setState(() {});
-            // });
             showModalBottomSheet(
                 context: context,
                 shape: RoundedRectangleBorder(
@@ -61,7 +58,7 @@ class _ListKomentarPageState extends State<ListKomentarPage> {
                         Container(
                           height: 270,
                           padding: EdgeInsets.all(16),
-                          child: Column(
+                          child: ListView(
                             children: [
                               Text(
                                 'Berikan Komentar Anda',
@@ -76,6 +73,7 @@ class _ListKomentarPageState extends State<ListKomentarPage> {
                                 hasLabel: true,
                                 label: 'Komentar',
                                 hintText: 'Silahkan Masukkan Komentar Anda',
+                                textInputType: TextInputType.multiline,
                               ),
                               SizedBox(
                                 height: 24,
@@ -98,7 +96,9 @@ class _ListKomentarPageState extends State<ListKomentarPage> {
                       ],
                     ),
                   );
-                });
+                }).whenComplete(() {
+              _commentController.text = '';
+            });
           },
         ),
         body: Container(
@@ -108,13 +108,22 @@ class _ListKomentarPageState extends State<ListKomentarPage> {
             child: BlocBuilder<KomentarCubit, KomentarState>(
               builder: (context, state) {
                 if (state is KomentarLoaded) {
-                  return ListView(
-                    children: state.comments!
-                        .map((e) => KomentarCard(
-                              comment: e,
-                            ))
-                        .toList(),
-                  );
+                  if (state.comments!.length > 0) {
+                    return ListView(
+                      children: state.comments!
+                          .map((e) => KomentarCard(
+                                comment: e,
+                              ))
+                          .toList(),
+                    );
+                  } else {
+                    return Center(
+                      child: Text(
+                        'Belum Ada Pesan',
+                        style: normalBoldTextStyle.copyWith(fontSize: 18),
+                      ),
+                    );
+                  }
                 } else {
                   return LoadingIndicator();
                 }
