@@ -1,8 +1,13 @@
+import 'dart:developer';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:sampah/data/cubit/cubit.dart';
 import 'package:sampah/data/cubit/edukasi_cubit.dart';
 import 'package:sampah/data/models/models.dart';
@@ -17,6 +22,8 @@ void main() async {
 
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
+
+  await Firebase.initializeApp();
 
   runApp(MyApp(
     token: userToken,
@@ -43,10 +50,12 @@ class MyApp extends StatelessWidget {
       child: GlobalLoaderOverlay(
         useDefaultLoading: false,
         overlayWidget: LoadingOverlay(),
-        child: GetMaterialApp(
-          title: 'Sampah',
-          theme: ThemeData(primarySwatch: Colors.lightGreen),
-          home: token == null ? LoginPage() : MainPage(),
+        child: OverlaySupport(
+          child: GetMaterialApp(
+            title: 'Sampah',
+            theme: ThemeData(primarySwatch: Colors.lightGreen),
+            home: token == null ? LoginPage() : MainPage(),
+          ),
         ),
       ),
     );

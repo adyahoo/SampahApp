@@ -18,5 +18,6 @@ part 'transaksi_model.dart';
 part 'history_penukaran_model.dart';
 part 'admin_model.dart';
 part 'komentar_model.dart';
+part 'notif_model.dart';
 
 part 'models.g.dart';

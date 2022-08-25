@@ -11,12 +11,17 @@ class UserService {
     client = http.Client();
     String url = baseUrl + '/login';
 
+    final firebaseMsg = FirebaseMessaging.instance;
+    String? fcmToken = await firebaseMsg.getToken();
+    log(fcmToken!);
+
     var response = await client.post(Uri.parse(url), headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       "Accept": "application/json"
     }, body: {
       "telepon": telepon,
-      "password": password
+      "password": password,
+      "fcm_token": fcmToken
     });
 
     var data = jsonDecode(response.body);
@@ -160,8 +165,7 @@ class UserService {
     request.fields.addAll(params);
 
     if (image != null) {
-      var multiPartFile = await http.MultipartFile.fromPath(
-          'foto', image.path,
+      var multiPartFile = await http.MultipartFile.fromPath('foto', image.path,
           contentType: MediaType('image', 'png'), filename: 'gambar asjah');
       // var multiPartFile = await http.MultipartFile.fromString(
       //     'foto', image.path,

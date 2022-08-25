@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1096763299413",
+    "project_id": "nasabahsampah",
+    "storage_bucket": "nasabahsampah.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096763299413:android:8cfc43af9b5fb7390c66dc",
+        "android_client_info": {
+          "package_name": "com.example.sampah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096763299413-vnlu138k40b3aasg7of1i7vkj7bls7oa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdf52_yXSH9CQCFqAKnwQMKqs4i6UvEbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096763299413-vnlu138k40b3aasg7of1i7vkj7bls7oa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
