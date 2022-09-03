@@ -17,15 +17,22 @@ class ListRankingPage extends StatelessWidget {
             child: BlocBuilder<RankingCubit, RankingState>(
               builder: (context, state) {
                 if (state is RankingLoaded) {
-                  return ListView(
-                    children: state.rankings!
-                        .map((e) => RankingCard(
-                              index: (state.rankings!.indexOf(e) + 1),
-                              username: e.name,
-                              saldo: e.saldo,
-                            ))
-                        .toList(),
-                  );
+                  if (state.rankings!.length > 0) {
+                    return ListView(
+                      children: state.rankings!
+                          .map((e) => RankingCard(
+                                index: (state.rankings!.indexOf(e) + 1),
+                                username: e.name,
+                                saldo: e.saldo,
+                              ))
+                          .toList(),
+                    );
+                  } else {
+                    return EmptyState(
+                      height: 150,
+                      msg: 'Tidak Ada Data Ranking',
+                    );
+                  }
                 } else {
                   return LoadingIndicator();
                 }

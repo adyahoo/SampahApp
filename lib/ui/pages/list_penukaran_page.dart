@@ -16,11 +16,17 @@ class ListPenukaranPage extends StatelessWidget {
         child: BlocBuilder<PenukaranCubit, PenukaranState>(
           builder: (context, state) {
             if (state is PenukaranLoaded) {
-              return Column(
-                children: state.penukarans!
-                    .map((e) => HistoryPenukaranCard(penukaran: e))
-                    .toList(),
-              );
+              if (state.penukarans!.length > 0) {
+                return Column(
+                  children: state.penukarans!
+                      .map((e) => HistoryPenukaranCard(penukaran: e))
+                      .toList(),
+                );
+              } else {
+                return EmptyState(
+                  msg: 'Tidak Ada Data Penukaran',
+                );
+              }
             } else {
               return LoadingIndicator();
             }

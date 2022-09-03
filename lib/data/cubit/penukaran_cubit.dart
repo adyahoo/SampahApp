@@ -23,6 +23,8 @@ class PenukaranCubit extends Cubit<PenukaranState> {
     ApiReturnValue<List<HistoryPenukaranModel>> result =
         await PenukaranServices.getPenukaran();
 
+    List<HistoryPenukaranModel> empty = [];
+
     if (result.status == true) {
       emit(PenukaranLoaded(result.value));
     } else {

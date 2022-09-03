@@ -36,6 +36,15 @@ class EdukasiLoaded extends EdukasiState {
   List<Object?> get props => [];
 }
 
+class DetailEdukasiLoaded extends EdukasiState {
+  final EdukasiModel? edukasi;
+
+  DetailEdukasiLoaded({this.edukasi});
+
+  @override
+  List<Object?> get props => [];
+}
+
 class LoadDataFailed extends EdukasiState {
   final String? message;
 

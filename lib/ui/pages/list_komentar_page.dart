@@ -117,11 +117,9 @@ class _ListKomentarPageState extends State<ListKomentarPage> {
                           .toList(),
                     );
                   } else {
-                    return Center(
-                      child: Text(
-                        'Belum Ada Pesan',
-                        style: normalBoldTextStyle.copyWith(fontSize: 18),
-                      ),
+                    return EmptyState(
+                      height: 150,
+                      msg: 'Belum Ada Pesan',
                     );
                   }
                 } else {

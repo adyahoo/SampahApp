@@ -8,6 +8,8 @@ part 'ranking_state.dart';
 class RankingCubit extends Cubit<RankingState> {
   RankingCubit() : super(RankingInitial());
 
+  List<RankingModel> empty = [];
+
   Future<void> getAllRanking() async {
     ApiReturnValue<List<RankingModel>> result =
         await RankingServices.getAllRanking();

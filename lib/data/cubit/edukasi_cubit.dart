@@ -11,6 +11,8 @@ part 'edukasi_state.dart';
 class EdukasiCubit extends Cubit<EdukasiState> {
   EdukasiCubit() : super(EdukasiInitial());
 
+  List<EdukasiModel> empty = [];
+
   Future<void> getNewestEdukasi() async {
     ApiReturnValue<List<EdukasiModel>> result =
         await EdukasiService.getNewestEdukasi();
@@ -33,12 +35,26 @@ class EdukasiCubit extends Cubit<EdukasiState> {
     }
   }
 
-  Future<void> getDetailEdukasi(int id) async {
+  Future<void> getNewestDetailEdukasi(int id) async {
     try {
       ApiReturnValue<EdukasiModel> result =
           await EdukasiService.getDetailEdukasi(id);
       if (result.status == true) {
         emit(EdukasiLoaded(edukasi: result.value));
+      } else {
+        emit(LoadDataFailed(result.message));
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  Future<void> getDetailEdukasi(int id) async {
+    try {
+      ApiReturnValue<EdukasiModel> result =
+          await EdukasiService.getDetailEdukasi(id);
+      if (result.status == true) {
+        emit(DetailEdukasiLoaded(edukasi: result.value));
       } else {
         emit(LoadDataFailed(result.message));
       }

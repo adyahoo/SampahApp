@@ -11,35 +11,9 @@ class _MainPageState extends State<MainPage> {
   int _selectedPage = 0;
   PageController _pageController = PageController();
 
-  void registerNotification() async {
-    await Firebase.initializeApp();
-    final firebaseMsg = FirebaseMessaging.instance;
-
-    NotificationSettings settings = await firebaseMsg.requestPermission(
-      alert: true,
-      badge: true,
-      provisional: false,
-      sound: true,
-    );
-
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        NotifModel notif = NotifModel(
-          title: message.notification!.title,
-          subtitle: message.notification!.body,
-        );
-
-        showSimpleNotification(Text(notif.title!),
-            subtitle: Text(notif.subtitle!),
-            background: tertiaryColor,
-            duration: Duration(seconds: 2));
-      });
-    }
-  }
-
   @override
   void initState() {
-    registerNotification();
+    // registerNotification();
 
     super.initState();
   }

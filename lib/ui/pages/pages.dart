@@ -42,4 +42,5 @@ part 'list_pemasukan_page.dart';
 part 'list_penukaran_page.dart';
 part 'change_password_page.dart';
 part 'list_komentar_page.dart';
+part 'detail_all_news_page.dart';
 part 'store_komentar_page.dart';

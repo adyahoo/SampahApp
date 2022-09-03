@@ -20,17 +20,23 @@ class ListNewsPage extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 12),
             child: BlocBuilder<EdukasiCubit, EdukasiState>(
               builder: ((context, state) => (state is ListEdukasiLoaded)
-                  ? GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, mainAxisExtent: 254),
-                      itemCount: state.edukasis!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return NewsCard(
-                            onPress: () => Get.to(() =>
-                                DetailNewsPage(id: state.edukasis![index].id!)),
-                            edukasi: state.edukasis![index],
-                            isVertical: true);
-                      })
+                  ? (state.edukasis!.length > 0)
+                      ? GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2, mainAxisExtent: 254),
+                          itemCount: state.edukasis!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return NewsCard(
+                                onPress: () => Get.to(() => DetailAllNewsPage(
+                                    id: state.edukasis![index].id!)),
+                                edukasi: state.edukasis![index],
+                                isVertical: true);
+                          })
+                      : EmptyState(
+                          height: 150,
+                          msg: 'Tidak Ada Data Berita',
+                        )
                   : LoadingIndicator()),
             )),
       ),

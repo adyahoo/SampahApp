@@ -37,19 +37,25 @@ class HistoryPenukaranCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Status Transaksi : ${e.status! == 'menunggu_konfirmasi' ? 'Menunggu Konfirmasi' : e.status! == 'terkonfirmasi' ? 'Valid' : 'Ditolak'}',
-                          style: primaryBoldTextStyle.copyWith(fontSize: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Status Transaksi : ${e.status! == 'menunggu_konfirmasi' ? 'Menunggu Konfirmasi' : e.status! == 'terkonfirmasi' ? 'Valid' : 'Ditolak'}',
+                              style:
+                                  primaryBoldTextStyle.copyWith(fontSize: 16),
+                            ),
+                            Text(
+                              '${e.status! != 'menunggu_konfirmasi' ? penukaran.tglPenukaran : ''}',
+                              style: primaryTextStyle,
+                            ),
+                          ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Tanggal : ${e.tglPenukaran}',
-                              style: primaryTextStyle,
-                            ),
-                            Text(
-                              '${convertCurrency(e.jumlahPenukaran.toString())}',
+                              'Total Transaksi : ${convertCurrency(e.jumlahPenukaran.toString())}',
                               style: primaryTextStyle,
                             ),
                           ],

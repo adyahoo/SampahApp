@@ -94,20 +94,24 @@ class _HomePageState extends State<HomePage> {
                                         ],
                                       )),
                                   //section berita
-                                  SectionTitle(
-                                    title: 'Berita',
-                                    hasButton: true,
-                                    btnTitle: 'Lihat Semua',
-                                    onPress: () {
-                                      Get.to(() => ListNewsPage())
-                                          ?.then((value) => setState((() {})));
-                                    },
-                                  ),
-                                  SizedBox(height: 18),
                                   BlocBuilder<EdukasiCubit, EdukasiState>(
-                                      builder: ((context, state) =>
-                                          (state is ListNewestEdukasiLoaded)
-                                              ? Container(
+                                      builder: ((context, state) => (state
+                                                  is ListNewestEdukasiLoaded &&
+                                              state.edukasis!.length > 0)
+                                          ? Column(
+                                              children: [
+                                                SectionTitle(
+                                                  title: 'Berita',
+                                                  hasButton: true,
+                                                  btnTitle: 'Lihat Semua',
+                                                  onPress: () {
+                                                    Get.to(() => ListNewsPage())
+                                                        ?.then((value) =>
+                                                            setState((() {})));
+                                                  },
+                                                ),
+                                                SizedBox(height: 18),
+                                                Container(
                                                   height: 126,
                                                   width: double.infinity,
                                                   child: ListView(
@@ -124,38 +128,45 @@ class _HomePageState extends State<HomePage> {
                                                               isVertical: false))
                                                           .toList()),
                                                 )
-                                              : SizedBox())),
+                                              ],
+                                            )
+                                          : SizedBox())),
                                   SizedBox(
-                                    height: 50,
+                                    height: 30,
                                   ),
                                   //section ranking
-                                  SectionTitle(
-                                    title: 'Ranking',
-                                    hasButton: true,
-                                    btnTitle: 'Lihat Semua',
-                                    onPress: () {
-                                      Get.to(() => ListRankingPage())
-                                          ?.then((value) {
-                                        setState(() {});
-                                      });
-                                    },
-                                  ),
-                                  SizedBox(
-                                    height: 18,
-                                  ),
                                   BlocBuilder<RankingCubit, RankingState>(
                                     builder: (context, state) {
-                                      if (state is RankingHomeLoaded) {
+                                      if (state is RankingHomeLoaded &&
+                                          state.rankings!.length > 0) {
                                         return Column(
-                                          children: state.rankings!
-                                              .map((e) => RankingCard(
-                                                    saldo: e.saldo,
-                                                    username: e.name,
-                                                    index: (state.rankings!
-                                                            .indexOf(e) +
-                                                        1),
-                                                  ))
-                                              .toList(),
+                                          children: [
+                                            SectionTitle(
+                                              title: 'Ranking',
+                                              hasButton: true,
+                                              btnTitle: 'Lihat Semua',
+                                              onPress: () {
+                                                Get.to(() => ListRankingPage())
+                                                    ?.then((value) {
+                                                  setState(() {});
+                                                });
+                                              },
+                                            ),
+                                            SizedBox(
+                                              height: 18,
+                                            ),
+                                            Column(
+                                              children: state.rankings!
+                                                  .map((e) => RankingCard(
+                                                        saldo: e.saldo,
+                                                        username: e.name,
+                                                        index: (state.rankings!
+                                                                .indexOf(e) +
+                                                            1),
+                                                      ))
+                                                  .toList(),
+                                            )
+                                          ],
                                         );
                                       } else {
                                         return SizedBox();

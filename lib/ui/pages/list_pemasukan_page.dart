@@ -16,15 +16,21 @@ class ListPemasukanPage extends StatelessWidget {
           child: BlocBuilder<TransaksiCubit, TransaksiState>(
             builder: ((context, state) {
               if (state is TransaksiLoaded) {
-                return Column(
-                  children: state.transaksis!
-                      .map(
-                        (e) => HistoryPemasukanCard(
-                          transaksi: e,
-                        ),
-                      )
-                      .toList(),
-                );
+                if (state.transaksis!.length > 0) {
+                  return Column(
+                    children: state.transaksis!
+                        .map(
+                          (e) => HistoryPemasukanCard(
+                            transaksi: e,
+                          ),
+                        )
+                        .toList(),
+                  );
+                } else {
+                  return EmptyState(
+                    msg: 'Tidak Ada Data Pemasukan',
+                  );
+                }
               } else {
                 return LoadingIndicator();
               }

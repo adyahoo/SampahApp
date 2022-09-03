@@ -1,20 +1,13 @@
 part of 'pages.dart';
 
-class DetailNewsPage extends StatefulWidget {
+class DetailAllNewsPage extends StatelessWidget {
   final int id;
 
-  const DetailNewsPage({Key? key, required this.id}) : super(key: key);
+  const DetailAllNewsPage({Key? key, required this.id}) : super(key: key);
 
-  @override
-  State<DetailNewsPage> createState() => _DetailNewsPageState();
-}
-
-class _DetailNewsPageState extends State<DetailNewsPage> {
   @override
   Widget build(BuildContext context) {
-    setState((() {
-      context.read<EdukasiCubit>().getNewestDetailEdukasi(widget.id);
-    }));
+    context.read<EdukasiCubit>().getDetailEdukasi(id);
 
     return Scaffold(
         appBar: CustomAppbar(
@@ -24,7 +17,7 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
         body: SafeArea(
             child: SingleChildScrollView(
           child: BlocBuilder<EdukasiCubit, EdukasiState>(
-            builder: ((context, state) => (state is EdukasiLoaded)
+            builder: ((context, state) => (state is DetailEdukasiLoaded)
                 ? Container(
                     color: Colors.white,
                     child: Column(

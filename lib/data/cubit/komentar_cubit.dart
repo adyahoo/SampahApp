@@ -14,6 +14,8 @@ class KomentarCubit extends Cubit<KomentarState> {
     ApiReturnValue<List<KomentarModel>> result =
         await KomentarServices.getComments();
 
+    List<KomentarModel> empty = [];
+
     if (result.status == true) {
       emit(KomentarLoaded(comments: result.value));
     } else {
