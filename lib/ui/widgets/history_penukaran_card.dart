@@ -46,7 +46,7 @@ class HistoryPenukaranCard extends StatelessWidget {
                                   primaryBoldTextStyle.copyWith(fontSize: 16),
                             ),
                             Text(
-                              '${e.status! != 'menunggu_konfirmasi' ? penukaran.tglPenukaran : ''}',
+                              '${e.status! != 'menunggu_konfirmasi' ? e.waktu : ''}',
                               style: primaryTextStyle,
                             ),
                           ],

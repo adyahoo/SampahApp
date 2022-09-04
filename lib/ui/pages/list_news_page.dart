@@ -1,11 +1,16 @@
 part of 'pages.dart';
 
-class ListNewsPage extends StatelessWidget {
+class ListNewsPage extends StatefulWidget {
   const ListNewsPage({Key? key}) : super(key: key);
 
   @override
+  State<ListNewsPage> createState() => _ListNewsPageState();
+}
+
+class _ListNewsPageState extends State<ListNewsPage> {
+  @override
   Widget build(BuildContext context) {
-    context.watch<EdukasiCubit>().getAllEdukasi();
+    context.read<EdukasiCubit>().getAllEdukasi();
 
     return Scaffold(
       appBar: CustomAppbar(
@@ -29,7 +34,10 @@ class ListNewsPage extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index) {
                             return NewsCard(
                                 onPress: () => Get.to(() => DetailAllNewsPage(
-                                    id: state.edukasis![index].id!)),
+                                            id: state.edukasis![index].id!))!
+                                        .then((value) {
+                                      setState(() {});
+                                    }),
                                 edukasi: state.edukasis![index],
                                 isVertical: true);
                           })

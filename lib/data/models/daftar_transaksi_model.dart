@@ -8,6 +8,7 @@ class DaftarTransaksiModel extends Equatable {
   final String? tglTransaksi;
   final String? status;
   final int? isSampahEdited;
+  final String? waktu;
 
   DaftarTransaksiModel(
       {this.id,
@@ -16,7 +17,8 @@ class DaftarTransaksiModel extends Equatable {
       this.totalHarga,
       this.tglTransaksi,
       this.status,
-      this.isSampahEdited});
+      this.isSampahEdited,
+      this.waktu});
 
   factory DaftarTransaksiModel.fromJson(Map<String, dynamic> data) =>
       DaftarTransaksiModel(
@@ -25,6 +27,7 @@ class DaftarTransaksiModel extends Equatable {
           totalBerat: data['total_berat'].toDouble(),
           totalHarga: data['total_harga'],
           tglTransaksi: data['tanggal_transaksi'],
+          waktu: data['waktu'],
           status: data['status'],
           isSampahEdited: data['is_sampah_edited']);
 
@@ -35,6 +38,7 @@ class DaftarTransaksiModel extends Equatable {
         totalBerat,
         totalHarga,
         tglTransaksi,
+        waktu,
         status,
         isSampahEdited
       ];

@@ -46,7 +46,7 @@ class HistoryPemasukanCard extends StatelessWidget {
                                   primaryBoldTextStyle.copyWith(fontSize: 16),
                             ),
                             Text(
-                              '${e.status! != 'menunggu_konfirmasi' ? transaksi.tglTransaksi : ''}',
+                              '${e.status! != 'menunggu_konfirmasi' ? e.waktu : ''}',
                               style: primaryTextStyle,
                             ),
                           ],

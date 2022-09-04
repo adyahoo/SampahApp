@@ -8,6 +8,8 @@ class KomentarModel extends Equatable {
   final String? reply;
   final String? sendDate;
   final String? replyDate;
+  final String? sendTime;
+  final String? replyTime;
 
   KomentarModel(
       {this.id,
@@ -16,7 +18,9 @@ class KomentarModel extends Equatable {
       this.text,
       this.reply,
       this.sendDate,
-      this.replyDate});
+      this.sendTime,
+      this.replyDate,
+      this.replyTime});
 
   factory KomentarModel.fromJson(Map<String, dynamic> data) => KomentarModel(
       id: data['id'],
@@ -25,6 +29,9 @@ class KomentarModel extends Equatable {
       text: data['text'],
       reply: data['detail_chat'] != null ? data['detail_chat']['text'] : null,
       sendDate: data['created_at'],
+      sendTime: data['waktu'],
+      replyTime:
+          data['detail_chat'] != null ? data['detail_chat']['waktu'] : null,
       replyDate: data['detail_chat'] != null
           ? data['detail_chat']['created_at']
           : null);

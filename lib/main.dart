@@ -24,8 +24,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   print('Handling a background message ${message.messageId}');
-  print(message.notification!.title);
-  print(message.notification!.body);
 }
 
 late AndroidNotificationChannel channel;
@@ -33,13 +31,13 @@ late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
 Future<void> setupFlutterNotifications() async {
   channel = const AndroidNotificationChannel(
-    'high_importance_channel_2', // id
-    'High Importance Notifications 2', // title
+    'high_importance_channel_3', // id
+    'High Importance Notifications 3', // title
     description:
-        'This channel is used for important notifications 2.', // description
+        'This channel is used for important notifications 3.', // description
     importance: Importance.high,
     playSound: true,
-    sound: RawResourceAndroidNotificationSound('pop')
+    sound: RawResourceAndroidNotificationSound('notif')
   );
 
   flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();

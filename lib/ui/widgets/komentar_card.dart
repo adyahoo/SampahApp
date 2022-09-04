@@ -64,7 +64,9 @@ class _KomentarCardState extends State<KomentarCard> {
                   ],
                 ),
                 Text(
-                  convertDate(widget.comment!.sendDate!),
+                  convertDate(widget.comment!.sendDate!) +
+                      ', ' +
+                      widget.comment!.sendTime!,
                   style: primaryTextStyle.copyWith(fontSize: 12),
                 )
               ],
@@ -140,7 +142,7 @@ class ReplyCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  convertDate(comment!.replyDate!),
+                  convertDate(comment!.replyDate!) + ', ' + comment!.replyTime!,
                   style: primaryTextStyle.copyWith(fontSize: 12),
                 )
               ],
