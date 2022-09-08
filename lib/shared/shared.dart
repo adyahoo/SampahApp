@@ -30,3 +30,5 @@ void showFlutterNotification(RemoteMessage message) {
   // if (notification != null && android != null) {
   // }
 }
+
+String edukasiUrl = 'https://www.admin.gunabangsahmmunud.com/education';

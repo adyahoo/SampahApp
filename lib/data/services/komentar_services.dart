@@ -17,9 +17,11 @@ class KomentarServices {
       return ApiReturnValue(status: false, message: data['message']);
     }
 
-    List<KomentarModel> comments = (data['chat'] as Iterable)
-        .map((e) => KomentarModel.fromJson(e))
-        .toList();
+    List<KomentarModel> comments = data['chat'] != null
+        ? (data['chat'] as Iterable)
+            .map((e) => KomentarModel.fromJson(e))
+            .toList()
+        : [];
 
     return ApiReturnValue(
         status: true, value: comments, message: data['message']);

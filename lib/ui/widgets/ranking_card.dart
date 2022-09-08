@@ -26,38 +26,42 @@ class RankingCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 25,
-                      alignment: Alignment.center,
-                      child: Text(
-                        index.toString(),
-                        style: primaryBoldTextStyle.copyWith(fontSize: 18),
+              Expanded(
+                flex: 3,
+                child: Container(
+                  // margin: EdgeInsets.only(right: 12),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 25,
+                        alignment: Alignment.center,
+                        child: Text(
+                          index.toString(),
+                          style: primaryBoldTextStyle.copyWith(fontSize: 18),
+                        ),
                       ),
-                    ),
-                    Container(
-                      width: 1,
-                      height: 63,
-                      color: primaryColor,
-                      margin: EdgeInsets.symmetric(horizontal: 15),
-                    ),
-                    Container(
-                      width: 150,
-                      child: Text(
-                        username!,
-                        style: primaryBoldTextStyle,
-                        softWrap: true,
-                        // overflow: TextOverflow.ellipsis,
+                      Container(
+                        width: 1,
+                        height: 63,
+                        color: primaryColor,
+                        margin: EdgeInsets.symmetric(horizontal: 15),
                       ),
-                    ),
-                  ],
+                      Container(
+                        width: 150,
+                        child: Text(
+                          username!,
+                          style: primaryBoldTextStyle,
+                          softWrap: true,
+                          // overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Container(
-                width: 100,
+                // width: 100,
                 child: Text(
                   '${convertCurrency(saldo!)}',
                   style: primaryTextStyle,

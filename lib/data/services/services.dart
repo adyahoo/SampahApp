@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:sampah/data/models/models.dart';

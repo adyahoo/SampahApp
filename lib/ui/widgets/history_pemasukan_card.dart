@@ -41,12 +41,12 @@ class HistoryPemasukanCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Status Transaksi : ${e.status! == 'menunggu_konfirmasi' ? 'Menunggu Konfirmasi' : e.status! == 'terkonfirmasi' ? 'Valid' : 'Ditolak'}',
+                              'Status Transaksi : ${e.status! == 'menunggu_konfirmasi' ? 'Pending' : e.status! == 'terkonfirmasi' ? 'Valid' : 'Ditolak'}',
                               style:
                                   primaryBoldTextStyle.copyWith(fontSize: 16),
                             ),
                             Text(
-                              '${e.status! != 'menunggu_konfirmasi' ? e.waktu : ''}',
+                              '${e.waktu}',
                               style: primaryTextStyle,
                             ),
                           ],

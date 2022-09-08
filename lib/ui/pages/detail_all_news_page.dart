@@ -50,16 +50,7 @@ class _DetailAllNewsPageState extends State<DetailAllNewsPage> {
                       Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 12),
-                          child: Html(
-                            data: state.edukasi?.konten,
-                            style: {
-                              "p": Style(
-                                fontSize: FontSize(18),
-                              )
-                            },
-                          )
-                          // Text(state.edukasi!.konten!)
-                          ),
+                          child: Text(state.edukasi!.konten!)),
                     ],
                   ),
                 );

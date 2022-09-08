@@ -13,7 +13,10 @@ class _PenukaranPageState extends State<PenukaranPage> {
   TextEditingController _tukarController = TextEditingController();
 
   void handlePenukaran() async {
-    if (int.parse(_tukarController.text) > widget.saldo! ||
+    if (_tukarController.text.isEmpty) {
+      snackbarError(
+          title: 'Terjadi Kesalahan', message: 'Mohon Lengkapi Seluruh Data');
+    } else if (int.parse(_tukarController.text) > widget.saldo! ||
         int.parse(_tukarController.text) == 0) {
       snackbarError(
           title: "Terjadi Kesalahan", message: "Saldo Tidak Mencukupi");
@@ -112,15 +115,18 @@ class _PenukaranPageState extends State<PenukaranPage> {
                               ),
                             ],
                           ),
-                          Container(
-                            width: 200,
-                            child: TextField(
-                                controller: _tukarController,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  hintText: 'Jumlah Penukaran',
-                                  hintStyle: secondaryTextStyle,
-                                )),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              width: 200,
+                              child: TextField(
+                                  controller: _tukarController,
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                    hintText: 'Jumlah Penukaran',
+                                    hintStyle: secondaryTextStyle,
+                                  )),
+                            ),
                           )
                         ],
                       ),

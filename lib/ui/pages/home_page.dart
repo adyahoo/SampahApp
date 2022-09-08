@@ -119,13 +119,20 @@ class _HomePageState extends State<HomePage> {
                                                           Axis.horizontal,
                                                       children: state.edukasis!
                                                           .map((e) => NewsCard(
-                                                              onPress: () => Get.to(() =>
-                                                                  DetailNewsPage(
-                                                                      id: e.id!))?.then(
+                                                              onPress: () => Get
+                                                                  .to(() =>
+                                                                      DetailNewsPage(
+                                                                        id: e
+                                                                            .id!,
+                                                                        slug: e
+                                                                            .slug,
+                                                                      ))?.then(
                                                                   (value) =>
-                                                                      setState(() {})),
+                                                                      setState(
+                                                                          () {})),
                                                               edukasi: e,
-                                                              isVertical: false))
+                                                              isVertical:
+                                                                  false))
                                                           .toList()),
                                                 )
                                               ],

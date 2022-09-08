@@ -54,7 +54,7 @@ class _KomentarCardState extends State<KomentarCard> {
                       width: 8,
                     ),
                     Container(
-                      width: 200,
+                      // width: 200,
                       child: Text(
                         widget.comment!.user!.nama!,
                         style: normalBoldTextStyle,
@@ -134,7 +134,7 @@ class ReplyCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  width: 200,
+                  // width: 200,
                   child: Text(
                     comment!.admin!.nama!,
                     style: normalBoldTextStyle.copyWith(fontSize: 12),

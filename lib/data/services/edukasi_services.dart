@@ -19,9 +19,11 @@ class EdukasiService {
           message: '${data['message']}, Silahkan Ulangi Kembali');
     }
 
-    List<EdukasiModel> edukasis = (data['data'] as Iterable)
-        .map((e) => EdukasiModel.fromJson(e))
-        .toList();
+    List<EdukasiModel> edukasis = data['data'] != null
+        ? (data['data'] as Iterable)
+            .map((e) => EdukasiModel.fromJson(e))
+            .toList()
+        : [];
 
     return ApiReturnValue(value: edukasis, status: data['success']);
   }
@@ -44,9 +46,11 @@ class EdukasiService {
           message: '${data['message']}, Silahkan Ulangi Kembali');
     }
 
-    List<EdukasiModel> edukasis = (data['data'] as Iterable)
-        .map((e) => EdukasiModel.fromJson(e))
-        .toList();
+    List<EdukasiModel> edukasis = data['data'] != null
+        ? (data['data'] as Iterable)
+            .map((e) => EdukasiModel.fromJson(e))
+            .toList()
+        : [];
 
     return ApiReturnValue(value: edukasis, status: data['success']);
   }

@@ -43,9 +43,11 @@ class PenukaranServices {
       return ApiReturnValue(status: false, message: data['message']);
     }
 
-    List<HistoryPenukaranModel> penukarans = (data['penukaran'] as Iterable)
-        .map((e) => HistoryPenukaranModel.fromJson(e))
-        .toList();
+    List<HistoryPenukaranModel> penukarans = data['penukaran'] != null
+        ? (data['penukaran'] as Iterable)
+            .map((e) => HistoryPenukaranModel.fromJson(e))
+            .toList()
+        : [];
 
     return ApiReturnValue(
         status: true, value: penukarans, message: data['message']);

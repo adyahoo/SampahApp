@@ -15,9 +15,11 @@ class CommonService {
           message: '${data['message']}, Gagal Mendapatkan Data Banjar');
     }
 
-    List<BanjarModel> banjars = (data['banjar'] as Iterable)
-        .map((e) => BanjarModel.fromJson(e))
-        .toList();
+    List<BanjarModel> banjars = data['banjar'] != null
+        ? (data['banjar'] as Iterable)
+            .map((e) => BanjarModel.fromJson(e))
+            .toList()
+        : [];
 
     return ApiReturnValue(
         value: banjars, message: 'Data Banjar Berhasil Diperoleh');

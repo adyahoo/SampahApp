@@ -1,9 +1,10 @@
 part of 'pages.dart';
 
 class DetailNewsPage extends StatefulWidget {
-  final int id;
+  final int? id;
+  final String? slug;
 
-  const DetailNewsPage({Key? key, required this.id}) : super(key: key);
+  const DetailNewsPage({Key? key, this.id, this.slug}) : super(key: key);
 
   @override
   State<DetailNewsPage> createState() => _DetailNewsPageState();
@@ -11,10 +12,22 @@ class DetailNewsPage extends StatefulWidget {
 
 class _DetailNewsPageState extends State<DetailNewsPage> {
   @override
+  void initState() {
+    super.initState();
+    // Enable virtual display.
+    if (Platform.isAndroid) WebView.platform = AndroidWebView();
+  }
+
+  WebViewPlusController? _controller;
+  double _height = 1;
+  bool isLoading = true;
+
+  @override
   Widget build(BuildContext context) {
-    setState((() {
-      context.read<EdukasiCubit>().getNewestDetailEdukasi(widget.id);
-    }));
+    // setState((() {
+    //   context.read<EdukasiCubit>().getNewestDetailEdukasi(widget.id);
+    // }));
+    print(widget.slug);
 
     return Scaffold(
         appBar: CustomAppbar(
@@ -23,50 +36,31 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
         ),
         body: SafeArea(
             child: SingleChildScrollView(
-          child: BlocBuilder<EdukasiCubit, EdukasiState>(
-            builder: ((context, state) => (state is EdukasiLoaded)
-                ? Container(
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        //section thumbnail
-                        Container(
-                          width: double.infinity,
-                          height: 250,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      baseUrlImg + state.edukasi!.thumbnail!),
-                                  fit: BoxFit.cover)),
-                        ),
-                        //section judul
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
-                          child: Text(
-                            state.edukasi!.judul!,
-                            style: primaryBoldTextStyle.copyWith(fontSize: 22),
-                          ),
-                        ),
-                        //section content
-                        Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 12),
-                            child: Html(
-                              data: state.edukasi?.konten,
-                              style: {
-                                "p": Style(
-                                  fontSize: FontSize(18),
-                                )
-                              },
-                            )
-                            // Text(state.edukasi!.konten!)
-                            ),
-                      ],
-                    ),
+          child: Stack(children: [
+            Container(
+                height: this._height,
+                child: WebViewPlus(
+                  onWebViewCreated: (controller) {
+                    this._controller = controller;
+                    // controller.loadUrl(edukasiUrl + '/${widget.slug}');
+                  },
+                  initialUrl: edukasiUrl + '/${widget.slug}',
+                  onPageFinished: (url) {
+                    this._controller?.getHeight().then((height) {
+                      setState(() {
+                        this._height = height;
+                        this.isLoading = false;
+                      });
+                    });
+                  },
+                  javascriptMode: JavascriptMode.unrestricted,
+                )),
+            isLoading
+                ? Center(
+                    child: LoadingIndicator(),
                   )
-                : LoadingIndicator()),
-          ),
+                : Stack()
+          ]),
         )));
   }
 }

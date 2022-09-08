@@ -87,7 +87,7 @@ class UserService {
     }
 
     return ApiReturnValue(
-        message: '${data['message']}, Silahkan Login Kembali',
+        message: '${data['errors'][0]['message']}',
         status: data['success']);
   }
 
@@ -196,7 +196,7 @@ class UserService {
 
     if (response.statusCode != 200) {
       return ApiReturnValue(
-          status: false, message: '${data['message']}, Silahkan Coba Kembali');
+          status: false, message: '${data['errors'][0]['message']}');
     }
 
     UserModel user = UserModel.fromJson(data['user']);

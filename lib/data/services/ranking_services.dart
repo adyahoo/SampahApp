@@ -17,9 +17,11 @@ class RankingServices {
       return ApiReturnValue(status: false, message: data['message']);
     }
 
-    List<RankingModel> rankings = (data['ranking'] as Iterable)
-        .map((e) => RankingModel.fromJson(e))
-        .toList();
+    List<RankingModel> rankings = data['ranking'] != null
+        ? (data['ranking'] as Iterable)
+            .map((e) => RankingModel.fromJson(e))
+            .toList()
+        : [];
 
     return ApiReturnValue(
         status: true, value: rankings, message: data['message']);
@@ -41,9 +43,11 @@ class RankingServices {
       return ApiReturnValue(status: false, message: data['message']);
     }
 
-    List<RankingModel> topRankings = (data['ranking'] as Iterable)
-        .map((e) => RankingModel.fromJson(e))
-        .toList();
+    List<RankingModel> topRankings = data['ranking'] != null
+        ? (data['ranking'] as Iterable)
+            .map((e) => RankingModel.fromJson(e))
+            .toList()
+        : [];
 
     return ApiReturnValue(status: true, value: topRankings);
   }

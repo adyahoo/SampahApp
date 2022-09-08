@@ -33,8 +33,10 @@ class _ListNewsPageState extends State<ListNewsPage> {
                           itemCount: state.edukasis!.length,
                           itemBuilder: (BuildContext context, int index) {
                             return NewsCard(
-                                onPress: () => Get.to(() => DetailAllNewsPage(
-                                            id: state.edukasis![index].id!))!
+                                onPress: () => Get.to(() => DetailNewsPage(
+                                              id: state.edukasis![index].id!,
+                                              slug: state.edukasis![index].slug,
+                                            ))!
                                         .then((value) {
                                       setState(() {});
                                     }),
