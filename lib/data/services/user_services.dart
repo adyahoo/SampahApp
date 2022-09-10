@@ -83,11 +83,11 @@ class UserService {
 
     if (response.statusCode != 200) {
       return ApiReturnValue(
-          status: false, message: '${data['message']}, Silahkan Coba Lagi');
+          status: false, message: data['errors'][0]['message']);
     }
 
     return ApiReturnValue(
-        message: '${data['errors'][0]['message']}',
+        message: '${data['message']}',
         status: data['success']);
   }
 

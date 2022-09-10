@@ -31,37 +31,37 @@ class _RegisterPageState extends State<RegisterPage> {
       });
   }
 
+  void handleRegister() async {
+    setState((() {
+      context.loaderOverlay.show();
+    }));
+
+    String bornDate = DateFormat('yyyy-MM-dd').format(_selectedDate);
+
+    await context.read<UserCubit>().register(
+        _phoneController.text,
+        _nameController.text,
+        bornDate,
+        _passwordController.text,
+        _confPasswordController.text,
+        _addressController.text,
+        _selectedBanjar!);
+    UserState state = context.read<UserCubit>().state;
+
+    if (state is UserRegistered) {
+      context.loaderOverlay.hide();
+      snackbarSuccess(title: '${state.message}');
+      Get.offAll(() => LoginPage());
+    } else {
+      context.loaderOverlay.hide();
+      snackbarError(
+          title: 'Registrasi Gagal',
+          message: (state as UserLoadedFailed).message);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    void handleRegister() async {
-      setState((() {
-        context.loaderOverlay.show();
-      }));
-
-      String bornDate = DateFormat('yyyy-MM-dd').format(_selectedDate);
-
-      await context.read<UserCubit>().register(
-          _phoneController.text,
-          _nameController.text,
-          bornDate,
-          _passwordController.text,
-          _confPasswordController.text,
-          _addressController.text,
-          _selectedBanjar!);
-      UserState state = context.read<UserCubit>().state;
-
-      if (state is UserRegistered) {
-        context.loaderOverlay.hide();
-        snackbarSuccess(title: '${state.message}');
-        Get.offAll(() => LoginPage());
-      } else {
-        context.loaderOverlay.hide();
-        snackbarError(
-            title: 'Registrasi Gagal',
-            message: (state as UserLoadedFailed).message);
-      }
-    }
-
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
