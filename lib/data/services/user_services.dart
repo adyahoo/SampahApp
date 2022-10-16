@@ -87,8 +87,7 @@ class UserService {
     }
 
     return ApiReturnValue(
-        message: '${data['message']}',
-        status: data['success']);
+        message: '${data['message']}', status: data['success']);
   }
 
   static Future<ApiReturnValue<UserModel>> logout({http.Client? client}) async {
@@ -194,7 +193,7 @@ class UserService {
 
     var data = jsonDecode(responseBody);
 
-    if (response.statusCode != 200) {
+    if (data['success'] != true) {
       return ApiReturnValue(
           status: false, message: '${data['errors'][0]['message']}');
     }

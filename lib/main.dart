@@ -31,10 +31,10 @@ late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
 Future<void> setupFlutterNotifications() async {
   channel = const AndroidNotificationChannel(
-    'high_importance_channel_3', // id
-    'High Importance Notifications 3', // title
+    'high_importance_channel_6', // id
+    'High Importance Notifications 6', // title
     description:
-        'This channel is used for important notifications 3.', // description
+        'This channel is used for important notifications 6.', // description
     importance: Importance.high,
     playSound: true,
     sound: RawResourceAndroidNotificationSound('notif')

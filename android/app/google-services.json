@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1096763299413",
-    "project_id": "nasabahsampah",
-    "storage_bucket": "nasabahsampah.appspot.com"
+    "project_number": "1053526846793",
+    "project_id": "nasabahsampahng",
+    "storage_bucket": "nasabahsampahng.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1096763299413:android:8cfc43af9b5fb7390c66dc",
+        "mobilesdk_app_id": "1:1053526846793:android:2bbda12d91589c862ffe98",
         "android_client_info": {
-          "package_name": "com.example.sampah"
+          "package_name": "com.gunabangsa.nasabah"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1096763299413-vnlu138k40b3aasg7of1i7vkj7bls7oa.apps.googleusercontent.com",
+          "client_id": "1053526846793-nn1fjaccgae0em4ugkiag78a68ml78la.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBdf52_yXSH9CQCFqAKnwQMKqs4i6UvEbY"
+          "current_key": "AIzaSyCMeIxDttyNi6WTOlsehBzXdxfI5X5Z2ug"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1096763299413-vnlu138k40b3aasg7of1i7vkj7bls7oa.apps.googleusercontent.com",
+              "client_id": "1053526846793-nn1fjaccgae0em4ugkiag78a68ml78la.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

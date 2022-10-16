@@ -1,4 +1,4 @@
-package com.example.sampah
+package com.gunabangsa.nasabah
 
 import io.flutter.embedding.android.FlutterActivity
 

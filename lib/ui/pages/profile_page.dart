@@ -114,6 +114,27 @@ class _ProfilePageState extends State<ProfilePage> {
                                             children: [
                                               Container(
                                                   width: 100,
+                                                  child: Text('Kode Nasabah',
+                                                      style:
+                                                          normalBoldTextStyle)),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  state.user!.nomorNasabah!,
+                                                  style: normalBoldTextStyle,
+                                                  softWrap: true,
+                                                ),
+                                              ),
+                                            ])),
+                                    Container(
+                                        width: double.infinity,
+                                        margin: EdgeInsets.only(bottom: 24),
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  width: 100,
                                                   child: Text('Nama',
                                                       style:
                                                           normalBoldTextStyle)),
