@@ -46,8 +46,8 @@ class UserModel extends Equatable {
       alamat: data['alamat'],
       jenisKelamin: data['jenis_kelamin'],
       fotoProfil: data['foto_profil'],
-      saldo: data['saldo'],
-      idBanjar: data['banjar_id'],
+      saldo: int.parse(data['saldo']),
+      idBanjar: int.parse(data['banjar_id']),
       nomorNasabah: data['nomor_nasabah'],
       banjar: BanjarModel.fromJson(data['banjar']));
 

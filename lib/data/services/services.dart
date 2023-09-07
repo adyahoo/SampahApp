@@ -23,8 +23,8 @@ part 'transaksi_service.dart';
 String TOKEN = 'TOKEN';
 String USER_BOX = 'USER_BOX';
 // String baseUrl = 'https://sinyampah.ngaeapp.com/api/user';
-String baseUrl = 'https://admin.gunabangsahmmunud.com/api/user';
-String baseUrlImg = 'https://admin.gunabangsahmmunud.com';
+String baseUrl = 'https://gunabangsa.sumbersolusidigital.com/api/user';
+String baseUrlImg = 'https://gunabangsa.sumbersolusidigital.com';
 
 Future<void> setUserPref({String? token}) async {
   SharedPreferences pref = await SharedPreferences.getInstance();

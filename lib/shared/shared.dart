@@ -31,4 +31,4 @@ void showFlutterNotification(RemoteMessage message) {
   // }
 }
 
-String edukasiUrl = 'https://www.admin.gunabangsahmmunud.com/education';
+String edukasiUrl = 'https://gunabangsa.sumbersolusidigital.com/education';

@@ -11,7 +11,7 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   PickedFile? _imagePicked = null;
-  DateTime? _selectedDate;
+  DateTime _selectedDate = DateTime.now();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _addressController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();

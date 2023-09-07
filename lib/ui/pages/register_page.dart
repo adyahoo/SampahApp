@@ -16,7 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _passwordVisible = false;
   bool _confPasswordVisible = false;
   DateTime _currentDate = DateTime.now();
-  DateTime? _selectedDate;
+  DateTime _selectedDate = DateTime.now();
   int? _selectedBanjar;
 
   Future<void> _selectDate(BuildContext context) async {

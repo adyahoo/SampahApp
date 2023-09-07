@@ -9,7 +9,7 @@ class HistoryPenukaranCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime stringToDate =
-        new DateFormat("yyyy-MM-dd").parse(penukaran.tglPenukaran);
+        new DateFormat("yyyy-MM-dd").parse(penukaran.tglPenukaran ?? "");
     String formatedDate = new DateFormat('yMMMMEEEEd').format(stringToDate);
     return Container(
       width: double.infinity,

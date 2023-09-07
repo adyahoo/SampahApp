@@ -31,6 +31,7 @@ class UserService {
     }
 
     UserModel.token = data['token'];
+    print(data['user']);
     UserModel user = UserModel.fromJson(data['user']);
 
     setUserPref(token: UserModel.token);
