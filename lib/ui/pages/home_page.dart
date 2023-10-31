@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                                           )
                                         ],
                                       )),
-                                  //section berita
+                                  //section edukasi
                                   BlocBuilder<EdukasiCubit, EdukasiState>(
                                       builder: ((context, state) => (state
                                                   is ListNewestEdukasiLoaded &&

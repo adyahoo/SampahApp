@@ -23,17 +23,37 @@ class NewsCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  width: 126,
-                  height: 126,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          // image: AssetImage('assets/images/chaeyoung.jpg'),
-                          image: NetworkImage(baseUrlImg + edukasi.thumbnail!),
-                          // image: NetworkImage(
-                          //     'https://kpopping.com/documents/2e/5/220802-TWICE-Chaeyoung-Chanel-Pop-Up-Store-Event-documents-1.jpeg?v=0eaaa'),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(5)),
-                ),
+                    width: 126,
+                    height: 126,
+                    child: FadeInImage(
+                      image: NetworkImage(
+                        baseUrlImg + edukasi.thumbnail!,
+                      ),
+                      placeholder: Image.asset('assets/images/logo.png').image,
+                      imageErrorBuilder: (context, error, stackTrace) =>
+                          Image.asset('assets/images/logo.png'),
+                    )
+                    // decoration: BoxDecoration(
+                    //     image: DecorationImage(
+                    //         // image: AssetImage('assets/images/chaeyoung.jpg'),
+                    //         // image: FadeInImage(
+                    //         //   image: NetworkImage(
+                    //         //     baseUrlImg + edukasi.thumbnail!,
+                    //         //   ),
+                    //         //   placeholder:
+                    //         //       AssetImage('assets/images/chaeyoung.jpg'),
+                    //         // ).image,
+                    //         // image: NetworkImage(
+                    //         //   baseUrlImg + edukasi.thumbnail!,
+                    //         // ),
+                    //         image: CachedNetworkImage(
+                    //           imageUrl: baseUrlImg + edukasi.thumbnail!,
+                    //           errorWidget: (context, url, error) =>
+                    //               AssetImage('assets/images/chaeyoung.jpg'),
+                    //         ),
+                    //         fit: BoxFit.cover),
+                    //     borderRadius: BorderRadius.circular(5)),
+                    ),
                 Container(
                   width: 142,
                   padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
@@ -81,12 +101,19 @@ class NewsCard extends StatelessWidget {
               Container(
                 width: 180,
                 height: 126,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    image: DecorationImage(
-                        image: NetworkImage(baseUrlImg + edukasi.thumbnail!),
-                        // image: AssetImage('assets/images/chaeyoung.jpg'),
-                        fit: BoxFit.contain)),
+                child: FadeInImage(
+                  image: NetworkImage(
+                    baseUrlImg + edukasi.thumbnail!,
+                  ),
+                  placeholder: Image.asset('assets/images/logo.png').image,
+                  imageErrorBuilder: (context, error, stackTrace) =>
+                      Image.asset('assets/images/logo.png'),
+                ),
+                // decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(5),
+                //     image: DecorationImage(
+                //         image: NetworkImage(baseUrlImg + edukasi.thumbnail!),
+                //         fit: BoxFit.contain)),
               ),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
